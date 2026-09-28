@@ -1722,7 +1722,8 @@ const WAITLIST=true,SITE={
   "address": "[Postal address], Barcelona, Spain",
   "email": "[Contact email]",
   "brevoAction": "",
-  "updated": "September 2026"
+  "updated": "September 2026",
+  "goatcounter": ""
 };
 function isOpen(p){ if(WAITLIST)return !!p.featured; if(S.unlocked||p.featured||S.freeIds.has(p.id))return true; if(S.scores){const top=[...PROPS].sort((a,b)=>S.scores.get(b.id).s-S.scores.get(a.id).s).slice(0,3);if(top.some(t=>t.id===p.id))return true} return false }
 const joinDlg=document.getElementById("join"),wlDlg=document.getElementById("waitlist");
@@ -1935,13 +1936,13 @@ const LEGAL={
     <h3>Who is responsible</h3><p>${ph(SITE.owner)}, ${ph(SITE.address)}. Contact: ${ph(SITE.email)}.</p>
     <h3>What we collect and why</h3>
     <dl class="kv"><dt>Waitlist</dt><dd>Your email, and if you choose, what you're planning. We use it to tell you when Sana opens and to shape what we build first. Legal basis: your consent (GDPR article 6.1.a). Kept until you unsubscribe or ask us to delete it.</dd>
-    <dt>Visit statistics</dt><dd>Cloudflare Web Analytics counts page views without cookies and without building a profile of you. Legal basis: our legitimate interest in knowing which pages are useful (article 6.1.f).</dd>
+    <dt>Visit statistics</dt><dd>GoatCounter (an EU-friendly, open-source service) counts page views without cookies and without building a profile of you. It stores the page, referrer, browser type and country, never your IP address. Legal basis: our legitimate interest in knowing which pages are useful (article 6.1.f).</dd>
     <dt>In your browser</dt><dd>Your planner answers, dates and home airport are saved only in your own browser so the site remembers them. They are never sent to us.</dd></dl>
     <h3>Who processes it for us</h3><p>Brevo (Sendinblue SAS, France) sends our emails and stores the waitlist in the EU. Cloudflare, Inc. hosts the site and measures visits; it may process data in the United States under the EU-US Data Privacy Framework and the European Commission's standard contractual clauses. We don't sell or share your data with anyone else, and we make no automated decisions about you.</p>
     <h3>Your rights</h3><p>You can ask to see, correct or delete your data, object to or limit how we use it, take a copy of it, and withdraw consent at any time. Every email has an unsubscribe link, or write to ${ph(SITE.email)}. If you think we've got it wrong, you can complain to the Spanish Data Protection Agency (AEPD) at aepd.es.</p>`],
   cookies:["Cookie policy",()=>`<p>Sana uses no advertising or tracking cookies.</p>
     <dl class="kv"><dt>Browser storage</dt><dd>We save your planner answers, dates, home airport and theme in your browser's local storage, only to provide features you ask for. This is exempt from consent under article 22.2 of the LSSI-CE. Clear it any time in your browser settings.</dd>
-    <dt>Visit statistics</dt><dd>Cloudflare Web Analytics measures visits without cookies.</dd>
+    <dt>Visit statistics</dt><dd>GoatCounter measures visits without cookies.</dd>
     <dt>Fonts</dt><dd>Our fonts are served from our own site, so loading a page doesn't contact a font provider.</dd></dl>
     <p>If we ever add cookies that need your consent, we'll ask first, and you'll be able to change your mind at any time.</p>`],
   terms:["Terms of use",()=>`<p>By using this site you agree to these terms.</p>
@@ -1990,6 +1991,9 @@ function openWaitlist(note){const mi=joinDlg.querySelector(".modal-in");joinDlg.
     mi.querySelector("[data-close]").onclick=()=>joinDlg.close()});
   if(!joinDlg.open)joinDlg.showModal()}
 function wlGate(){av.innerHTML=pageShell("Opening soon","Trips and accounts open at launch.","In the preview you can read six full stay reports and every destination. Join the waitlist and we'll tell you when the rest opens.",`<div class="row start gap-3"><button class="btn btn-primary" type="button" id="gateJoin">Join the waitlist</button><button class="btn btn-ghost" type="button" data-go="how">How it works</button></div>`);av.querySelector("#gateJoin").onclick=()=>openWaitlist();av.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go))}
+/* visitor stats: GoatCounter, cookie-free; counts each page of the app, including hash pages */
+if(SITE.goatcounter){window.goatcounter={no_onload:true};const gc=document.createElement("script");gc.async=true;gc.src="https://gc.zgo.at/count.js";gc.dataset.goatcounter=`https://${SITE.goatcounter}.goatcounter.com/count`;
+  const hit=()=>window.goatcounter?.count?.({path:location.pathname+(location.hash||"#home")});gc.onload=hit;document.head.appendChild(gc);addEventListener("hashchange",hit)}
 if(WAITLIST){document.body.classList.add("wl");const nf0=document.getElementById("newsForm");if(nf0){nf0.querySelector("button").textContent="Join the waitlist";nf0.querySelector("input").setAttribute("aria-label","Your email for the waitlist")}const nn=document.getElementById("newsNote");if(nn)nn.textContent="One email when we open. Nothing else.";const cc=document.querySelector(".closing-copy");if(cc){cc.innerHTML=`<span class="eyebrow">Private preview</span><h2>Get into the full collection first.</h2><p>The best-reviewed boutique hotels in the world, read end to end by people who care about taste: what guests praise, what they quietly criticise, and whether your dates are the right ones. Six reports are open now. The other 23 go to the waitlist first.</p><div class="cg-assure"><span>Free to join</span><span>No card</span><span>One email when we open</span></div><div class="row"><button class="btn btn-primary" type="button" data-join><span>Join the waitlist</span><span aria-hidden="true">→</span></button><button class="btn btn-line" type="button" id="closeRead">Read a free report</button></div>`;cc.querySelector("#closeRead").onclick=()=>go("stay-"+(PROPS.find(p=>p.featured)?.id||""))}const j=document.getElementById("appJoin");if(j)j.textContent="Join the waitlist";
   const nf=document.getElementById("newsForm");if(nf)nf.addEventListener("submit",async e=>{if(SITE.brevoAction)try{await fetch(SITE.brevoAction,{method:"POST",mode:"no-cors",body:new FormData(e.target)})}catch(_){}},true);
   document.addEventListener("click",e=>{const t=e.target.closest("#reqBtn,[data-trial-stay],[data-quote],[data-askconc],#saveTrip,#saveTripD");if(!t)return;e.stopImmediatePropagation();e.preventDefault();openWaitlist(t.id==="reqBtn"||t.matches("[data-quote],[data-askconc]")?"Booking opens at launch.":"Trips open at launch.")},true)}
