@@ -1410,6 +1410,57 @@ dialog.modal{max-height:calc(100dvh - 32px);overflow:auto}
 .hw-opts{display:flex;flex-wrap:wrap;gap:var(--s2)}
 .hw-opts span{padding:var(--s1) var(--s3);border-radius:var(--r-pill);border:1px solid var(--n6);font-size:var(--t-sm);color:var(--n12)}
 .hw-opts span.on{background:var(--cta);border-color:var(--cta);color:var(--on-cta)}
+.appbar-right{display:flex;align-items:center;gap:var(--s2)}
+.talk-btn{position:relative;display:inline-flex;align-items:center;gap:var(--s2);min-height:34px;padding:0 var(--s4);border-radius:var(--r-pill);font:inherit;font-size:var(--t-sm);cursor:pointer;color:var(--n12);background:var(--gl-bg);border:1px solid var(--gl-bd);box-shadow:inset 0 1px 0 var(--gl-hi);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:background-color var(--dur-s) var(--ease),color var(--dur-s) var(--ease),border-color var(--dur-s) var(--ease)}
+.talk-btn:hover{background:var(--gl-bg-h)}
+body.at-home:not(.scrolled) .talk-btn{color:var(--on-ink);background:var(--gl-bg-ink);border-color:var(--gl-bd-ink);box-shadow:inset 0 1px 0 var(--gl-hi-ink)}
+.talk-dot{display:none;width:7px;height:7px;border-radius:50%;background:var(--cta)}
+.talk-btn[aria-expanded="true"],body.at-home:not(.scrolled) .talk-btn[aria-expanded="true"]{background:#fff;color:#161512;border-color:#fff;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+.talk-btn[aria-expanded="true"] .talk-dot{display:block;animation:livePulse 2.4s var(--ease) infinite}
+@media (max-width:640px){.talk-btn span{display:none}.talk-btn{padding:0 var(--s3)}}
+/* page hero: one header for Collection, How it works and Journal */
+.page-hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:var(--s6);min-height:clamp(300px,34vw,420px);padding:var(--s7);border-radius:var(--r-xl);overflow:hidden;color:var(--on-ink);isolation:isolate;border:var(--edge-ink)}
+.page-hero .ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.page-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(18,18,15,.82) 0%,rgba(18,18,15,.55) 45%,rgba(18,18,15,.15) 100%),linear-gradient(0deg,rgba(18,18,15,.55),transparent 55%)}
+.page-hero .ph-copy{max-width:640px}
+.page-hero .ph-copy .eyebrow{color:var(--on-ink-2)}
+.page-hero .ph-copy h2{color:var(--on-ink)}
+.page-hero .ph-copy p{color:var(--on-ink-2)}
+.page-hero.col-top{padding:var(--s7)}
+.page-hero .col-actions{align-self:end}
+.page-hero .seg{background:var(--gl-bg-ink);border:1px solid var(--gl-bd-ink);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.page-hero .seg button{color:var(--on-ink-2)}
+.page-hero .seg button[aria-selected="true"]{background:rgba(243,238,228,.18);color:var(--on-ink)}
+@media (max-width:760px){.page-hero{grid-template-columns:1fr;padding:var(--s5)}}
+.hw-hero .row{margin-top:var(--s2)}
+/* steps: number row, then title and example start on the same line */
+.hw-step{grid-template-rows:auto auto;row-gap:var(--s3)}
+.hw-step>.hw-nrow{grid-column:1/-1;display:flex;align-items:center;gap:var(--s3);min-height:26px}
+.launch-badge{display:inline-flex;align-items:center;gap:6px;padding:3px var(--s3);border-radius:var(--r-pill);background:var(--a3);color:var(--a11);border:1px solid color-mix(in srgb,var(--a11) 25%,transparent);font-size:var(--t-xs);font-weight:500;white-space:nowrap}
+.launch-badge::before{content:"";width:13px;height:13px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%279%27/%3E%3Cpath d=%27M12 7v5l3 2%27/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%279%27/%3E%3Cpath d=%27M12 7v5l3 2%27/%3E%3C/svg%3E") center/contain no-repeat}
+.hw-ex:not(.bare){margin-top:0}
+.hw-step:has(>.hw-ex:not(.bare)){padding-top:calc(var(--sec-gap) + var(--sec-space))}
+.hw-copy h3{margin-top:0}
+.hw-deal-v2{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;gap:var(--s8);min-height:0;padding:var(--s8)}
+.hw-deal-v2::before{background:linear-gradient(90deg,rgba(18,18,15,.88) 0%,rgba(18,18,15,.7) 50%,rgba(18,18,15,.45) 100%)}
+.hw-deal-v2 h2{font-size:var(--t-h2);font-weight:300;letter-spacing:var(--ls-title-l);line-height:1.08;margin:0}
+.hw-deal-v2{margin-top:40px}
+.hw-deal-v2 .ph-copy p{margin:0;max-width:52ch}
+.deal-free .wl-free>.eyebrow{color:var(--on-ink-2)}
+@media (max-width:900px){.hw-deal-v2{grid-template-columns:1fr;padding:var(--s6)}}
+/* one hairline for every photo surface, drawn over the image */
+.rep-hero,.j-hero,.j-lead-photo,.j-card-photo,.j-photo,.card .photo,.dcard .photo,.hw-photo,.hw-for-photo,.closing-photo,.aside-card .cg-photo{position:relative}
+.rep-hero::after,.j-hero::after,.j-lead-photo::after,.j-card-photo::after,.j-photo::after,.card .photo::after,.dcard .photo::after,.hw-photo::after,.hw-for-photo::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(243,238,228,.16);pointer-events:none;z-index:3}
+/* Talk with Sana: a small living orb, slow conic spin and a soft breathing glow */
+.talk-orb{position:relative;flex:none;width:16px;height:16px;border-radius:50%;background:conic-gradient(from 0deg,#e9e4d2,#8f9a5c,#4a5530,#c9d09f,#e9e4d2);animation:orbSpin 7s linear infinite;box-shadow:0 0 0 0 rgba(143,154,92,.0)}
+.talk-orb::after{content:"";position:absolute;inset:-4px;border-radius:50%;background:radial-gradient(circle,rgba(201,208,159,.45),transparent 65%);animation:orbBreath 3.6s var(--ease-io) infinite;z-index:-1}
+.talk-orb i{position:absolute;inset:3px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.95),rgba(255,255,255,.2) 45%,transparent 70%);animation:orbSpin 7s linear infinite reverse}
+@keyframes orbSpin{to{transform:rotate(360deg)}}
+@keyframes orbBreath{0%,100%{opacity:.35;transform:scale(.85)}50%{opacity:1;transform:scale(1.25)}}
+.talk-btn{isolation:isolate}
+.talk-btn[aria-expanded="true"] .talk-orb{animation-duration:2.4s}
+.talk-btn[aria-expanded="true"] .talk-orb::after{animation-duration:1.8s}
+@media (prefers-reduced-motion:reduce){.talk-orb,.talk-orb i,.talk-orb::after{animation:none}}
 .chip-ok::before{content:"✓";margin-right:6px;color:var(--a11)}
 .chip-warn{border-color:var(--mixed)}
 .chip-warn::before{content:"!";margin-right:6px;color:var(--mixed);font-weight:600}
@@ -1417,8 +1468,8 @@ dialog.modal{max-height:calc(100dvh - 32px);overflow:auto}
 
 <header class="appbar" id="appbar" hidden>
   <button class="brand" type="button" data-go="home">SANA</button>
-  <nav aria-label="Main"><button type="button" data-go="collection">Collection</button><button type="button" data-go="how" class="hide-s">How it works</button><button type="button" data-go="journal" class="hide-s">Journal</button><button type="button" data-talk class="hide-s">Talk with Sana</button><button type="button" data-go="trips" id="navTrips">My trips</button><button type="button" data-go="signin" id="navAcct">Sign in</button></nav>
-  <button class="btn btn-primary btn-sm" type="button" data-join id="appJoin">Join free</button>
+  <nav aria-label="Main"><button type="button" data-go="collection">Collection</button><button type="button" data-go="how" class="hide-s">How it works</button><button type="button" data-go="why" class="hide-s">Why Sana</button><button type="button" data-go="journal" class="hide-s">Journal</button><button type="button" data-go="trips" id="navTrips">My trips</button><button type="button" data-go="signin" id="navAcct">Sign in</button></nav>
+  <div class="appbar-right"><button class="talk-btn" type="button" data-talk aria-expanded="false"><span class="talk-orb" aria-hidden="true"><i></i></span><span>Talk with Sana</span></button><button class="btn btn-primary btn-sm" type="button" data-join id="appJoin">Join free</button></div>
 </header>
 
 <div id="v-home" class="view">
@@ -1512,10 +1563,9 @@ dialog.modal{max-height:calc(100dvh - 32px);overflow:auto}
 
 <main id="v-collection" class="view" hidden>
   <div class="page">
-    <div class="col-top">
-      <div class="sec-head"><span class="eyebrow" id="colEyebrow">Browse</span><h2 id="colTitle">The collection</h2><p id="colSub"></p></div>
+    <div class="col-top page-hero"><img class="ph-img" src="img/catalog.jpg" alt="">
+      <div class="sec-head ph-copy"><span class="eyebrow" id="colEyebrow">Browse</span><h2 id="colTitle">The collection</h2><p id="colSub"></p></div>
       <div class="col-actions">
-        <button class="btn btn-primary talk" type="button" data-talk><span class="av" aria-hidden="true">S</span>Talk with Sana</button>
         <div class="seg" role="tablist" aria-label="Browse"><button role="tab" type="button" data-mode="stays" aria-selected="true">Stays</button><button role="tab" type="button" data-mode="destinations" aria-selected="false">Destinations</button></div>
       </div>
     </div>
@@ -1858,7 +1908,7 @@ function renderJournal(slug){
   if(slug&&!a){renderNotFoundIn(jv);return}
   const date=new Date().toLocaleDateString("en-GB",{month:"long",year:"numeric"});
   if(!a){const [lead,...rest]=JOURNAL;
-    jv.innerHTML=`<div class="page"><div class="sec-head"><span class="eyebrow">Journal</span><h2>Notes from the reports.</h2><p>Free reading, built from the research behind every Sana report. Every fact links back to its source.</p></div>
+    jv.innerHTML=`<div class="page"><header class="page-hero"><img class="ph-img" src="img/beach.jpg" alt=""><div class="sec-head ph-copy"><span class="eyebrow">Journal</span><h2>Notes from the reports.</h2><p>Free reading, built from the research behind every Sana report. Every fact links back to its source.</p></div></header>
       <button class="j-lead" type="button" data-jart="${lead.slug}"><span class="j-lead-photo"><img src="${esc(jHero(lead))}" alt=""></span><span class="j-lead-text"><span class="eyebrow">${esc(lead.cat)} · ${esc(date)}</span><b>${esc(lead.title)}</b><span class="j-dek">${esc(lead.dek)}</span><span class="j-read">Read →</span></span></button>
       <div class="j-grid">${rest.map(x=>`<button class="j-card" type="button" data-jart="${x.slug}"><span class="j-card-photo"><img src="${esc(jHero(x))}" alt="" loading="lazy"></span><span class="eyebrow">${esc(x.cat)}</span><b>${esc(x.title)}</b><span class="j-dek">${esc(x.dek)}</span></button>`).join("")}</div>
 ${WAITLIST?`<section class="j-news book ink edge-ink"><div><span class="eyebrow">Private preview</span><h4>Get in first.</h4><p class="pb-sub">Six reports are open today. All 29 go to the private preview first.</p></div><div class="row start gap-3"><button class="btn btn-primary" type="button" data-join><span>Join the waitlist</span><span aria-hidden="true">→</span></button></div><div class="cg-assure"><span>Free</span><span>No card</span></div></section>`:`<section class="j-news book ink"><div><span class="eyebrow">The monthly note</span><h4>One email a month.</h4><p class="pb-sub">New stays, seasonal picks and what changed in the reports.</p></div><form id="jNews" class="row gap-2"><input class="input grow" type="email" name="EMAIL" required autocomplete="email" placeholder="Your email" aria-label="Your email"><button class="btn btn-primary" type="submit">Subscribe</button></form><p class="fine m0" id="jNewsNote">Free. Unsubscribe any time.</p></section>`}</div>`}
@@ -1965,35 +2015,33 @@ function joinWelcome(){joinIn.innerHTML=`<div class="row"><span class="eyebrow">
 }
 /* ---------- how it works, why Sana, legal pages ---------- */
 const ph=v=>/^\[.*\]$|\[/.test(v||"")?`<mark class="todo">${esc(v)}</mark>`:esc(v);
-function pageShell(eyebrow,title,sub,body){return `<div class="page"><div class="sec-head"><span class="eyebrow">${eyebrow}</span><h2>${title}</h2>${sub?`<p>${sub}</p>`:""}</div>${body}</div>`}
+function pageShell(eyebrow,title,sub,body,hero){const head=`<div class="sec-head${hero?" ph-copy":""}"><span class="eyebrow">${eyebrow}</span><h2>${title}</h2>${sub?`<p>${sub}</p>`:""}</div>`;return `<div class="page">${hero?`<header class="page-hero"><img class="ph-img" src="${hero}" alt="">${head}</header>`:head}${body}</div>`}
 function renderHow(){
   const p=PROPS.find(x=>x.id==="six-senses-ibiza")||PROPS.find(x=>x.featured),d=destOf(p),ds=destScore(d);
   const i=withDates(defaultDates(),()=>dateInfo(p)),cp=PROPS.find(x=>x.route==="concierge"&&x.foraPerks?.text&&x.featured)||PROPS.find(x=>x.route==="concierge"&&x.foraPerks?.text);
   const perks=cp?cp.foraPerks.text.replace(/\.$/,"").split(/,\s*(?:and\s+)?|;\s*|\s+and\s+(?=an?\s)/).filter(Boolean).slice(0,4).map(cap):[];
-  const nSrc=totalSources(),step=(n,t,you,we,why,ex)=>`<article class="hw-step" id="hw-s${n}"><div class="hw-copy"><span class="hw-n num">${n}</span><h3>${t}</h3><dl class="hw-dl"><div><dt>You</dt><dd>${you}</dd></div><div><dt>Sana</dt><dd>${we}</dd></div><div><dt>Why it matters</dt><dd>${why}</dd></div></dl></div>${ex?`<div class="hw-ex${ex.startsWith("<!--bare-->")?" bare":""}" aria-label="Example">${ex}</div>`:""}</article>`;
+  const nSrc=totalSources(),step=(n,t,you,we,why,ex)=>`<article class="hw-step" id="hw-s${n}"><div class="hw-nrow"><span class="hw-n num">${n}</span>${WAITLIST&&(n==="05"||n==="06")?`<span class="launch-badge">At launch</span>`:""}</div><div class="hw-copy"><h3>${t}</h3><dl class="hw-dl"><div><dt>You</dt><dd>${you}</dd></div><div><dt>Sana</dt><dd>${we}</dd></div><div><dt>Why it matters</dt><dd>${why}</dd></div></dl></div>${ex?`<div class="hw-ex${ex.startsWith("<!--bare-->")?" bare":""}" aria-label="Example">${ex}</div>`:""}</article>`;
   av.innerHTML=`<div class="page how">
-    <header class="hw-head"><div class="sec-head"><span class="eyebrow">How it works</span><h2>Taste, backed by data.</h2><p>Sana is for people who travel for the experience and plan like analysts: the right week, the right room, the right treatment. We do the research properly. You make the call.</p>
-      <div class="row start gap-3"><button class="btn btn-primary" type="button" data-hw-join>Join the waitlist</button><button class="btn btn-secondary" type="button" data-go="stay-${esc(p.id)}">Read a free report</button></div></div>
-      <nav class="hw-toc" aria-label="The six steps"><span class="eyebrow">Six steps</span><ol>${[["01","Tell us the trip"],["02","Read the full report"],["03","Score your dates"],["04","Compare places, not adverts"],["05","Book your way"],["06","Plan the trip"]].map(([n,t])=>`<li><a href="#" data-hwjump="hw-s${n}"><span class="num">${n}</span>${t}<span class="hw-toc-go" aria-hidden="true">→</span></a></li>`).join("")}</ol></nav></header>
-    <div class="hw-nums edge-ink"><div><b class="num">${PROPS.length}</b><span>Stays, chosen by hand</span></div><div><b class="num">${DESTS.length}</b><span>Destinations scored</span></div><div><b class="num">${nSrc.toLocaleString("en-GB")}</b><span>Sources cited</span></div><div><b class="num">6</b><span>Parts in every place score</span></div></div>
+    <header class="page-hero hw-hero"><img class="ph-img" src="img/room.jpg" alt=""><div class="sec-head ph-copy"><span class="eyebrow">How it works</span><h2>Taste, backed by data.</h2><p>Sana is for people who travel for the experience and plan like analysts: the right week, the right room, the right treatment. We do the research properly. You make the call.</p>
+      <div class="row start gap-3"><button class="btn btn-primary" type="button" data-hw-join>Join the waitlist</button><button class="btn btn-line" type="button" data-go="stay-${esc(p.id)}">Read a free report</button></div></div>
+      </header>
+    <div class="hw-nums edge-ink"><div><b class="num">${PROPS.length}</b><span>Stays, chosen by hand</span></div><div><b class="num">${DESTS.length}</b><span>Destinations scored</span></div><div><b class="num">${nSrc.toLocaleString("en-GB")}</b><span>Sources cited</span></div><div><b class="num">${PROPS.reduce((n,p)=>n+reviewCount(p),0).toLocaleString("en-GB")}</b><span>Guest reviews behind the ratings</span></div></div>
     <div class="hw-steps">
       ${step("01","Tell us the trip","Answer nine quick questions, or browse with filters for season, who's coming and what you want from the stay.","Scores every stay against your answers and opens the collection already filtered, best match first.","You start with five good options, not five hundred.",`<span class="eyebrow">Sana · trip planner · question 1 of 9</span><div class="hw-q"><p class="hw-bubble">What kind of stay are you dreaming of?</p><div class="hw-opts"><span>Boutique design</span><span class="on">Wellness</span><span>Longevity &amp; medical</span><span>Not sure yet</span></div></div><button class="btn btn-secondary btn-sm self-start" type="button" data-talk>Try the planner</button>`)}
       ${step("02","Read the full report","Open one page per stay: the place, guests, treatments, arrival, costs, health and local life.","Reads the reviews, the press and the official data, then distils them into themes with numbers. Every fact links to its source.","One report instead of forty tabs, and you see what guests criticise, not only what they praise.",`<span class="eyebrow">See a real one</span>${[["stay-"+p.id,img(p),"Stay report",p.name,`${d?.name||p.city}, ${p.country}`],...(()=>{const d2=[...DESTS].filter(z=>z.id!==d.id).sort((a,b)=>destScore(b).total-destScore(a).total)[0],p2=PROPS.find(x=>(d2.stays||[]).includes(x.id));return [["dest-"+d2.id,img(p2),"Destination report",d2.name,`Place score ${destScore(d2).total}/100`]]})()].map(([h,im,ey,t,sub])=>`<a class="elink raised has-photo" href="${esc(location.href.split("#")[0])}#${esc(h)}" target="_blank" rel="noopener"><span class="elink-photo"><img src="${esc(im)}" alt=""></span><span class="elink-body"><span class="eyebrow">${ey}</span><b>${esc(t)}</b><span class="small">${esc(sub)}</span></span><span class="elink-go" aria-hidden="true">↗</span></a>`).join("")}`)}
       ${step("03","Score your dates","Pick your dates, or let us start with next month.","Turns weather, season, crowds, events and your arrival day into one timing score that changes with your dates.","You find out it's rainy season before you book, not when you land.",i?`<span class="eyebrow">${esc(p.name)} · mid-${MONTHS_LONG[i.m-1]}</span><div class="dscore"><div class="ring" style="--v:${i.score}"><b class="num">${i.score}</b></div><div class="stack-2"><h4>${esc(i.label)}</h4><p class="small m0">${i.inSeason?`${MONTHS_LONG[i.m-1]} is in its best season.`:`${MONTHS_LONG[i.m-1]} is outside its best season.`}${i.c?` Around ${Math.round(i.c.highC)}°C by day.`:""}</p></div></div><div class="hw-bars hw-parts">${(i.parts||[]).map(([k,v,max,why])=>`<div><span>${esc(k)}</span><span class="track"><i style="width:${Math.round(v/max*100)}%"></i></span><b class="num">${v}/${max}</b><p class="small m0">${esc(cap(why||""))}</p></div>`).join("")}</div><p class="small m0">Four parts, 100 points. Change the dates and every part updates.</p>`:"")}
       ${step("04","Compare places, not adverts","Look at where you'd go, not just where you'd sleep.","Scores every destination on six parts: access, food, attractions, crowds, unique experiences and how smooth it is on the ground.","A place's quality never changes with your dates, so we keep the two apart and show you both.",`<span class="eyebrow">${esc(d.name)} · place score ${ds.total}</span><div class="hw-bars">${ds.dims.map(([k,v])=>`<div><span>${k}</span><span class="track"><i style="width:${v??0}%"></i></span><b class="num">${v??"–"}</b></div>`).join("")}</div>`)}
-      ${step("05",`Book your way, with more included${WAITLIST?' <span class="pill hw-soon">At launch</span>':""}`,"Book easy stays online, or ask our concierge for the exclusive ones.","Links easy stays to live prices. For the most exclusive stays, our concierge books at the hotel's own public rate and confirms the perks in writing within 24 hours.","Same rate, more included, and a person to reply to if plans change.",cp?`<span class="eyebrow">${esc(cp.name)} · with Sana</span><h4 class="hw-h4">Same rate. More included.</h4><div class="cg-assure hw-perks">${perks.map(x=>`<span>${esc(x)}</span>`).join("")}</div><p class="small m0">You pay the hotel directly. We never ask for your card.</p>`:"")}
-      ${step("06","Plan the trip","Save stays and places, pin what matters and share it with the people you travel with.","Organises everything from your reports into one board: where to eat, what to do, treatments, events in your month, getting there, emergency numbers.","The trip in one place, ready to export to your notes or an AI project.",`<span class="eyebrow">Your trip · pinned</span><ul class="klist">${(p.nearby?.restaurants||[]).slice(0,1).concat((p.nearby?.activities||[]).slice(0,2)).map(x=>`<li><div><b class="strong">${esc(x.name)}</b><span class="from">${esc(p.name)}${x.distance?` · ${esc(x.distance)}`:""}</span></div><span class="pin" aria-hidden="true">★</span></li>`).join("")}</ul>${WAITLIST?`<span class="pill pill-line pill-soon">Opens at launch</span>`:""}`)}
+      ${step("05","Book your way, with more included","Book easy stays online, or ask our concierge for the exclusive ones.","Links easy stays to live prices. For the most exclusive stays, our concierge books at the hotel's own public rate and confirms the perks in writing within 24 hours.","Same rate, more included, and a person to reply to if plans change.",cp?`<span class="eyebrow">${esc(cp.name)} · with Sana</span><h4 class="hw-h4">Same rate. More included.</h4><div class="cg-assure hw-perks">${perks.map(x=>`<span>${esc(x)}</span>`).join("")}</div><p class="small m0">You pay the hotel directly. We never ask for your card.</p>`:"")}
+      ${step("06","Plan the trip","Save stays and places, pin what matters and share it with the people you travel with.","Organises everything from your reports into one board: where to eat, what to do, treatments, events in your month, getting there, emergency numbers.","The trip in one place, ready to export to your notes or an AI project.",`<span class="eyebrow">Your trip · pinned</span><ul class="klist">${(p.nearby?.restaurants||[]).slice(0,1).concat((p.nearby?.activities||[]).slice(0,2)).map(x=>`<li><div><b class="strong">${esc(x.name)}</b><span class="from">${esc(p.name)}${x.distance?` · ${esc(x.distance)}`:""}</span></div><span class="pin" aria-hidden="true">★</span></li>`).join("")}</ul>`)}
     </div>
     <div class="sec-head"><span class="eyebrow">Made for</span><h2>People who care how it's done.</h2></div>
     <div class="hw-for"><div><figure class="hw-for-photo"><img src="img/room.jpg" alt="A wood-panelled hotel room in Stockholm" loading="lazy"></figure><h3>You plan around the details</h3><p>The week, the room, the transfer, the treatment. Sana answers those first.</p></div><div><figure class="hw-for-photo"><img src="img/drive.jpg" alt="A woman laughing in a sunlit car on a road trip" loading="lazy"></figure><h3>You'd rather read one report</h3><p>Than forty tabs, three forums and a brochure that only tells you the good parts.</p></div><div><figure class="hw-for-photo"><img src="img/beach.jpg" alt="A woman reading on a blanket by the sea" loading="lazy"></figure><h3>You want an expert's view</h3><p>Deep research from expert travellers who understand what makes a trip smooth, not only what looks good in photos.</p></div></div>
-    <div class="book ink concierge hw-deal">
-      <div class="cg-photo hw-deal-band"><img src="img/leaf2.jpg" alt=""><span class="eyebrow">The deal</span></div>
-      <div class="cg-body">
-        <div class="cg-head"><h4>Read six reports free today.<br>Be first in when the rest opens.</h4><p class="hw-deal-sub">Each report saves you an evening of tabs: every review, press feature, treatment menu and price read for you, sources linked, and scored for your dates. The waitlist hears first when all 29 open.</p></div>
-        <div class="cg-facts lined"><div><span class="eyebrow">Free now</span><b>Six full reports, every destination and the date score</b></div><div><span class="eyebrow">At launch</span><b>All 29 reports, a shareable trip workspace and booking</b></div><div><span class="eyebrow">Always</span><b>Research decides what we recommend. Anything sponsored is labelled.</b></div></div>
-        <div class="cg-cta hw-deal-cta"><button class="btn btn-primary" type="button" data-hw-join><span>Join the waitlist</span><span aria-hidden="true">→</span></button><div class="cg-assure"><span>Free preview</span><span>No card</span><span>A few emails a year</span></div></div>
-      </div>
-    </div>
+    <section class="page-hero hw-deal-v2" aria-label="Private preview"><img class="ph-img" src="img/leaf2.jpg" alt="">
+      <div class="ph-copy stack-3"><span class="eyebrow">Private preview</span><h2>For travellers who want<br>every stay to be right.</h2><p>You travel often, and you'd rather choose once and choose well. Every Sana report reads the reviews, the press and the official data for you, and scores the stay for your dates, so the trip feels considered from the first click. Six reports are open today; the private preview gets all 29 first.</p>
+        <div class="row start gap-3"><button class="btn btn-primary" type="button" data-hw-join><span>Request private access</span><span aria-hidden="true">→</span></button><button class="btn btn-line" type="button" data-go="stay-${esc(p.id)}">Read a free report</button></div>
+        <p class="fine m0 on-ink-2">Free, no card needed. Anything sponsored is always labelled.</p></div>
+      <div class="deal-free">${freeNums()}</div>
+    </section>
   </div>`;
   av.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
   av.querySelectorAll("[data-hw-join]").forEach(b=>b.onclick=()=>openWaitlist());
@@ -2008,7 +2056,7 @@ function renderWhy(){
     <div class="why-wrap"><table class="why"><thead><tr><th scope="col"><span class="sr">Feature</span></th>${cols.map((c,k)=>`<th scope="col"${k===0?' class="us"':""}>${c}</th>`).join("")}</tr></thead><tbody>${rows.map(([k,...v])=>`<tr><th scope="row">${k}</th>${v.map((x,i)=>`<td${i===0?' class="us"':""}>${x===Y?`<span class="yes">${ico("✓")}<span class="sr">Yes</span></span>`:x===N?`<span class="no" aria-label="No">–</span>`:`<span class="part">${x}</span>`}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
     <p class="caveat m0">Comparisons describe what each type of service typically offers in 2026, not any single company.</p>
     <div class="facts3"><div><span class="eyebrow">Fewer, better</span><p>About 30 stays, each read end to end: reviews, press, programmes, prices and the practical details you'd otherwise find on arrival.</p></div><div><span class="eyebrow">Honest by design</span><p>Research decides what we recommend. We show what guests criticise, say when data is missing, and label anything sponsored.</p></div><div><span class="eyebrow">Timing is separate</span><p>A place's quality never changes with your dates. Its timing score does. We keep the two apart.</p></div></div>
-    <div class="row start gap-3">${WAITLIST?`<button class="btn btn-primary" type="button" data-join>Join the waitlist</button><button class="btn btn-secondary" type="button" data-go="how">How it works</button>`:`<button class="btn btn-primary" type="button" data-go="how">How it works</button><button class="btn btn-ghost" type="button" data-go="collection">See the stays</button>`}</div>`);
+    <div class="row start gap-3">${WAITLIST?`<button class="btn btn-primary" type="button" data-join>Join the waitlist</button><button class="btn btn-secondary" type="button" data-go="how">How it works</button>`:`<button class="btn btn-primary" type="button" data-go="how">How it works</button><button class="btn btn-ghost" type="button" data-go="collection">See the stays</button>`}</div>`,"img/silhouette.jpg");
   av.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
 }
 const LEGAL={
@@ -2054,6 +2102,7 @@ async function joinList(email,source,form){
   if(SITE.waitlistEndpoint){try{const res=await fetch(SITE.waitlistEndpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,consent:true,source,website:form?.querySelector("[name=website]")?.value||""})});return res.ok}catch(_){return false}}
   if(SITE.brevoAction&&form){try{await fetch(SITE.brevoAction,{method:"POST",mode:"no-cors",body:new FormData(form)});return true}catch(_){return false}}
   return false}
+function freeNums(){const f=freeStats(),n=x=>x.toLocaleString("en-GB");return `<div class="wl-free"><span class="eyebrow">Free now</span><div class="wl-nums"><div><div class="wl-n"><b class="num">${f.stays}</b><em class="wl-tag">Preview</em></div><span>Full stay reports</span></div><div><div class="wl-n"><b class="num">${f.dests}</b><em class="wl-tag wl-live"><i></i>Growing</em></div><span>Destination reports</span></div><div><div class="wl-n"><b class="num">${n(f.facts)}</b></div><span>Data points <span class="info" tabindex="0">i<span class="tip">One data point is one checked fact: a price, a rating, a best month, a dish, a transfer time, an emergency number. Counted field by field from the free reports, not words.</span></span></span></div><div><div class="wl-n"><b class="num">${n(f.sources)}</b></div><span>Sources <span class="info" tabindex="0">i<span class="tip">Unique pages cited in the free reports: official hotel and tourism sites, press, government data and review platforms. Each report links its own.</span></span></span></div></div></div>`}
 function freeStats(){const skip=/source|url|link|img|^id$|^lat$|^lng$|featured|imageQuery|route|onOTA|confidence|stays|^type$/i;let n=0;const w=v=>{if(v==null||v==="")return;if(Array.isArray(v))v.forEach(w);else if(typeof v==="object")Object.entries(v).forEach(([k,x])=>{if(!skip.test(k))w(x)});else if(typeof v==="number"||(typeof v==="string"&&v.trim().length>1&&!/^https?:/.test(v)))n++};
   const F=PROPS.filter(isOpen);w(F);w(DESTS);return {stays:F.length,dests:DESTS.length,facts:n,sources:new Set([...F.flatMap(p=>p.sources||[]),...DESTS.flatMap(allSrc)]).size}}
 function openWaitlist(note){const mi=joinDlg.querySelector(".modal-in");joinDlg.classList.add("wl-dlg");
@@ -2061,7 +2110,7 @@ function openWaitlist(note){const mi=joinDlg.querySelector(".modal-in");joinDlg.
   <div class="wl-body">
   <div class="stack-2"><h3 id="joinTitle" class="wl-title">${esc(note||"Get in first.")}</h3>
   <p class="muted m0">Full reports on the world's best-reviewed boutique hotels. Six are open today; the private preview gets all 29 first.</p></div>
-  ${(()=>{const f=freeStats(),n=x=>x.toLocaleString("en-GB");return `<div class="wl-free"><span class="eyebrow">Free now</span><div class="wl-nums"><div><div class="wl-n"><b class="num">${f.stays}</b><em class="wl-tag">Preview</em></div><span>Full stay reports</span></div><div><div class="wl-n"><b class="num">${f.dests}</b><em class="wl-tag wl-live"><i></i>Growing</em></div><span>Destination reports</span></div><div><div class="wl-n"><b class="num">${n(f.facts)}</b></div><span>Data points <span class="info" tabindex="0">i<span class="tip">One data point is one checked fact: a price, a rating, a best month, a dish, a transfer time, an emergency number. Counted field by field from the free reports, not words.</span></span></span></div><div><div class="wl-n"><b class="num">${n(f.sources)}</b></div><span>Sources <span class="info" tabindex="0">i<span class="tip">Unique pages cited in the free reports: official hotel and tourism sites, press, government data and review platforms. Each report links its own.</span></span></span></div></div></div>`})()}
+  ${freeNums()}
   <dl class="wl-rows"><div><dt>At launch</dt><dd>Every report, booking, a shareable trip planner and more</dd></div><div><dt>Your inbox</dt><dd>A few emails a year, never spam</dd></div></dl>
   <form id="wlForm" class="stack-3" novalidate><input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><input class="input" id="wlEmail" name="EMAIL" type="email" required autocomplete="email" placeholder="Your email" aria-label="Your email">
   <label class="check"><input type="checkbox" id="wlConsent" name="OPT_IN" value="1"> Email me when Sana opens, and now and then with new stays and seasonal picks. I can unsubscribe any time.</label>
@@ -2135,10 +2184,10 @@ addEventListener("scroll",onNavScroll,{passive:true});
 
 /* ---------- floating home chat ---------- */
 const chatEl=document.querySelector("#plan .chat"),chatHome=chatEl.parentElement,chatFloat=document.getElementById("chatFloat");
-const talkState=o=>document.querySelectorAll("nav [data-talk]").forEach(b=>b.setAttribute("aria-expanded",o));
+const talkState=o=>document.querySelectorAll(".appbar [data-talk]").forEach(b=>b.setAttribute("aria-expanded",o));
 function openChatFloat(){chatFloat.querySelector(".chat-float-in").appendChild(chatEl);chatFloat.hidden=false;talkState(true);chatEl.querySelector(".opt,button")?.focus()}
 function closeChatFloat(){if(chatFloat.hidden)return;chatHome.appendChild(chatEl);chatFloat.hidden=true;talkState(false)}
-document.addEventListener("click",e=>{const t=e.target.closest("[data-talk]");if(t){chatFloat.hidden||!t.closest("nav")?openChatFloat():closeChatFloat();return}
+document.addEventListener("click",e=>{const t=e.target.closest("[data-talk]");if(t){chatFloat.hidden||!t.closest(".appbar")?openChatFloat():closeChatFloat();return}
   if(chatFloat.hidden)return;
   if(e.target.closest("[data-chat-close]")){closeChatFloat();return}
 });
