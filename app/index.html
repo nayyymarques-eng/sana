@@ -1505,6 +1505,11 @@ body.at-home:not(.scrolled) .talk-btn{color:var(--on-ink);background:var(--gl-bg
 .skel-in>*{animation:skIn .5s var(--ease) both}
 @keyframes skIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.onbanner{padding:var(--s5) var(--s6);gap:var(--s3)}
+.onbanner li:last-child{padding-bottom:0}
+.onbanner li:first-child{padding-top:0}
+.onbanner .ob-search{display:inline-block;margin-top:var(--s2);font-size:var(--t-sm);color:var(--a11);text-decoration:underline;text-underline-offset:3px}
+.onbanner .ob-search:hover{color:var(--n12)}
 .chip-ok::before{content:"✓";margin-right:6px;color:var(--a11)}
 .chip-warn{border-color:var(--mixed)}
 .chip-warn::before{content:"!";margin-right:6px;color:var(--mixed);font-weight:600}
@@ -2889,7 +2894,7 @@ function datesPanel(p){
       ${i.short?`<p class="warnline">The minimum stay here is ${i.short} nights.</p>`:""}
     </div></div>
     <details class="why"><summary>How this score is built</summary><ul class="parts">${i.parts.map(([k,v,max,why])=>`<li><span>${k}</span><span class="track"><i style="width:${Math.round(v/max*100)}%"></i></span><b class="num">${v}/${max}</b><p>${esc(why)}</p></li>`).join("")}</ul>${i.capped?`<p class="small m0">Capped at ${i.inSeason?100:74} because the dates fall outside the best season.</p>`:""}</details>
-    ${i.evs.length?`<section class="onbanner" aria-label="On while you're there"><span class="eyebrow">On while you're there</span><ul>${i.evs.slice(0,4).map(e=>`<li><div><b>${e.link?`<a href="${esc(e.link)}" target="_blank" rel="noopener">${esc(e.name)} ↗</a>`:esc(e.name)}</b><p>${esc(e.what||"")}</p></div><span class="when-pill">${esc(String(e.when||"").replace(/\s*-\s*/g," to "))}</span></li>`).join("")}</ul></section>`:""}
+    ${i.evs.length?`<section class="onbanner" aria-label="On while you're there"><span class="eyebrow">On while you're there</span><ul>${i.evs.slice(0,4).map(e=>`<li><div><b>${e.link?`<a href="${esc(e.link)}" target="_blank" rel="noopener">${esc(e.name)} ↗</a>`:esc(e.name)}</b><p>${esc(e.what||"")}</p><a class="ob-search" href="https://www.google.com/search?q=${encodeURIComponent(`${e.name} ${destOf(p)?.name||p.country||""} ${new Date().getFullYear()}`)}" target="_blank" rel="noopener">Look it up on Google ↗</a></div><span class="when-pill">${esc(String(e.when||"").replace(/\s*-\s*/g," to "))}</span></li>`).join("")}</ul></section>`:""}
     ${WAITLIST?"":p.route==="concierge"?`<div class="bookstrip"><span><b>Want these dates?</b> <span class="small">Your concierge quotes ${esc(fmt(i.st))} to ${esc(fmt(i.en))} with perks, within 24 hours.</span></span><button class="btn btn-primary btn-sm" type="button" data-quote>Get a quote for these dates</button></div>`:p.route==="direct"?`<div class="bookstrip"><span><b>Ready to book?</b> <span class="small">Ask the hotel for ${esc(fmt(i.st))} to ${esc(fmt(i.en))}. It isn't on booking sites.</span></span>${p.contact?.website?`<a class="btn btn-primary btn-sm" href="${esc(p.contact.website)}" target="_blank" rel="noopener">Book with the hotel ↗</a>`:""}</div>`:`<div class="bookstrip"><span><b>Ready to book?</b> <span class="small">Check live prices for ${esc(fmt(i.st))} to ${esc(fmt(i.en))}.</span></span><span class="row gap-2"><a class="btn btn-primary btn-sm" href="${bk}" target="_blank" rel="noopener sponsored">Book these dates ↗</a></span><span class="caveat span-all m0">We may earn a commission if you book, at no cost to you.</span></div>`}
     ${i.fromPlanner||assumed?datesForm("dForm"):`<details class="chg"><summary>Change dates</summary>${datesForm("dForm")}</details>`}`);
 }
