@@ -1971,7 +1971,7 @@ const WAITLIST=true,SITE={
   "brevoAction": "",
   "updated": "September 2026",
   "goatcounter": "",
-  "waitlistEndpoint": ""
+  "waitlistEndpoint": "https://sanawaitlist.nayara-marques.workers.dev"
 };
 function isOpen(p){ if(WAITLIST)return !!p.featured; if(S.unlocked||p.featured||S.freeIds.has(p.id))return true; if(S.scores){const top=[...PROPS].sort((a,b)=>S.scores.get(b.id).s-S.scores.get(a.id).s).slice(0,3);if(top.some(t=>t.id===p.id))return true} return false }
 const joinDlg=document.getElementById("join"),wlDlg=document.getElementById("waitlist");
