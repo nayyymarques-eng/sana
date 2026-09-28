@@ -1353,8 +1353,16 @@ a.app-link:hover{border-color:var(--n8)}
 .wl-rows>div:last-child{border-bottom:1px solid var(--veil-2)}
 .wl-rows dt{font-family:var(--mono);font-size:var(--t-2xs);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--on-ink-2)}
 .wl-rows dd{margin:0;font-size:var(--t-md);color:var(--on-ink)}
-.wl-body .muted{font-size:var(--t-md);line-height:1.6;max-width:46ch}
-.wl-fine{text-align:center}
+.wl-body .muted{font-size:var(--t-md);line-height:1.6;max-width:none;text-wrap:pretty}
+.wl-fine{text-align:left;color:var(--on-ink-2)}
+.wl-body .check{display:flex;gap:var(--s3);align-items:flex-start;font-size:var(--t-sm);line-height:1.5;color:var(--on-ink-2);cursor:pointer}
+.wl-body .check input{appearance:none;-webkit-appearance:none;flex:none;width:20px;height:20px;margin:0;border-radius:6px;border:1px solid var(--veil-3);background:var(--veil-1);display:grid;place-items:center;cursor:pointer;transition:background-color var(--dur-s) var(--ease),border-color var(--dur-s) var(--ease)}
+.wl-body .check input:checked{background:var(--cta);border-color:var(--cta)}
+.wl-body .check input:checked::after{content:"";width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-1px) rotate(-45deg)}
+.wl-body .check input:focus-visible{outline:2px solid var(--a9);outline-offset:2px}
+.wl-body #wlForm{gap:var(--s3)}
+.wl-body #wlForm .btn-primary{margin-top:var(--s2)}
+.wl-rows>div{padding:var(--s3) 0}
 .chip-ok::before{content:"✓";margin-right:6px;color:var(--a11)}
 .chip-warn{border-color:var(--mixed)}
 .chip-warn::before{content:"!";margin-right:6px;color:var(--mixed);font-weight:600}
@@ -2005,8 +2013,7 @@ function openWaitlist(note){const mi=joinDlg.querySelector(".modal-in");joinDlg.
   <dl class="wl-rows"><div><dt>Free now</dt><dd>Six full reports</dd></div><div><dt>At launch</dt><dd>All 29 reports and booking</dd></div><div><dt>Your inbox</dt><dd>One email when we open</dd></div></dl>
   <form id="wlForm" class="stack-3" novalidate><input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><input class="input" id="wlEmail" name="EMAIL" type="email" required autocomplete="email" placeholder="Your email" aria-label="Your email">
   <label class="check"><input type="checkbox" id="wlConsent" name="OPT_IN" value="1"> Email me when Sana opens. I can unsubscribe any time.</label>
-  <p class="warnline m0" id="wlErr" hidden></p><button class="btn btn-primary" type="submit"><span>Join the waitlist</span><span aria-hidden="true">→</span></button></form>
-  <p class="fine m0 wl-fine">Free, no card needed. Read our <button class="linkbtn" type="button" data-go="legal-privacy">privacy policy</button>.</p>
+  <p class="warnline m0" id="wlErr" hidden></p><button class="btn btn-primary" type="submit"><span>Join the waitlist</span><span aria-hidden="true">→</span></button><p class="fine m0 wl-fine">Free, no card needed. Read our <button class="linkbtn" type="button" data-go="legal-privacy">privacy policy</button>.</p></form>
   </div>`;
   mi.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>joinDlg.close());
   mi.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{joinDlg.close();go(b.dataset.go)});
