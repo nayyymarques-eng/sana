@@ -1327,6 +1327,23 @@ dialog.modal.wl-dlg{width:min(560px,calc(100% - 24px))}
 .aside .elink .elink-score b{color:var(--on-ink)}
 .aside .elink .elink-score small,.aside .elink .elink-score span{color:var(--on-ink-2)}
 .elink-body .elink-score span{margin-left:var(--s2)}
+.aside-card{display:grid;padding:0;overflow:hidden;text-align:left;width:100%;font:inherit;color:var(--on-ink)}
+.aside-card .cg-photo{display:block;height:120px}
+.aside-card .cg-photo .eyebrow{left:var(--s5)}
+.aside-card .cg-body{display:grid;gap:var(--s3);padding:var(--s2) var(--s5) var(--s5)}
+.aside-card h4{margin:0;font-weight:300;font-size:var(--t-h5);color:var(--on-ink)}
+button.dest-card{cursor:pointer;border:var(--edge-ink)}
+button.dest-card:hover{border-color:rgba(243,238,228,.3)}
+.dc-head{display:flex;justify-content:space-between;align-items:center;gap:var(--s3)}
+.dc-head .elink-go{color:var(--on-ink-2)}
+.dc-score{display:inline-flex;align-items:baseline;gap:var(--s1);justify-self:start;padding:var(--s1) var(--s3);border-radius:var(--r-pill);background:var(--veil-1);border:1px solid var(--veil-3)}
+.dc-score b{font-weight:300;font-size:var(--t-md);color:var(--on-ink)}
+.dc-score small{font-size:var(--t-xs);color:var(--on-ink-2)}
+.dc-score span{margin-left:var(--s2);font-family:var(--mono);font-size:var(--t-2xs);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--on-ink-2)}
+.app-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:var(--s2)}
+.app-link{display:grid;gap:2px;padding:var(--s3) var(--s4);border-radius:var(--r-md);background:var(--n3);border:1px solid var(--n5);color:var(--n12);text-decoration:none}
+a.app-link:hover{border-color:var(--n8)}
+.rep-main{max-width:760px;width:100%}
 .chip-ok::before{content:"✓";margin-right:6px;color:var(--a11)}
 .chip-warn{border-color:var(--mixed)}
 .chip-warn::before{content:"!";margin-right:6px;color:var(--mixed);font-weight:600}
@@ -2288,14 +2305,17 @@ const STAR='<svg class="rec-ico" viewBox="0 0 12 12" aria-hidden="true"><path d=
 
 /* ---------- getting from the airport: honest verdict + options ---------- */
 const VERDICT={"private-driver":"We recommend a private driver","ride-app":"A ride app works well here","taxi":"A taxi from the rank is fine","hotel-transfer":"Book the hotel's own transfer","boat":"Arrive by boat, arranged with the hotel","seaplane":"Arrive by seaplane, arranged with the hotel","rental-car":"Hire a car","train":"Take the train"};
+const APP_LINKS={uber:"https://www.uber.com/",bolt:"https://bolt.eu/",cabify:"https://cabify.com/",freenow:"https://www.free-now.com/",lyft:"https://www.lyft.com/",grab:"https://www.grab.com/",gojek:"https://www.gojek.com/",didi:"https://web.didiglobal.com/",careem:"https://www.careem.com/",indrive:"https://indrive.com/",indriver:"https://indrive.com/",yango:"https://yango.com/",ola:"https://www.olacabs.com/",blacklane:"https://www.blacklane.com/",go:"https://go.goinc.jp/",taxify:"https://bolt.eu/",beat:"https://thebeat.co/",easytaxi:"https://www.easytaxi.com/",maxim:"https://taximaxim.com/",lineman:"https://lineman.line.me/",bluebird:"https://www.bluebirdgroup.com/",myteksi:"https://www.grab.com/",taxi:"",freenowtaxi:"https://www.free-now.com/"};
+function txContact(p){const c=p.contact||{},subj=encodeURIComponent(`Airport transfer · ${p.name}`);const em=c.reservationsEmail,ph=c.phone;if(!em&&!ph)return "";
+  return `${em?`<a class="btn btn-secondary btn-sm" href="mailto:${esc(em)}?subject=${subj}">Email the hotel</a>`:""}${ph?`<a class="btn btn-secondary btn-sm" href="tel:${esc(String(ph).replace(/[^\d+]/g,""))}">Call ${esc(ph)}</a>`:""}`}
 function transferPanel(p){
   const a=p.arrival;if(!a)return "";
   const t=a.transfer||{},rec=t.recommended,ht=t.hotelTransfer||{},apps=a.rideApps||[],d=destOf(p);
   const bk=`https://www.booking.com/taxi/?pickup=${encodeURIComponent((a.airport||"")+" airport")}&dropoff=${encodeURIComponent(p.name+" "+p.city)}`;
   const O=[];
-  O.push({k:"hotel",name:"Hotel transfer",desc:ht.offered?`Arranged by the hotel${ht.price?`: ${ht.price}`:"; ask for the price when you book"}.`:ht.offered===false?"The hotel doesn't run its own transfer.":"Ask the hotel whether it arranges transfers.",cost:ht.price||null,act:p.route==="concierge"?`<button class="btn btn-secondary btn-sm" type="button" data-askconc>Ask concierge</button>`:"",rec:rec==="hotel-transfer"||rec==="boat"||rec==="seaplane"});
+  O.push({k:"hotel",name:"Hotel transfer",desc:ht.offered?`Arranged by the hotel${ht.price?`: ${ht.price}`:"; ask for the price when you book"}.`:ht.offered===false?"The hotel doesn't run its own transfer.":"Ask the hotel whether it arranges transfers.",cost:ht.price||null,act:WAITLIST||p.route!=="concierge"?txContact(p):`<button class="btn btn-secondary btn-sm" type="button" data-askconc>Ask concierge</button>`,rec:rec==="hotel-transfer"||rec==="boat"||rec==="seaplane"});
   if(!["boat","seaplane"].includes(rec))O.push({k:"private",name:"Private transfer",desc:"A driver waiting at arrivals at a price fixed before you fly. Two ways to book:",html:`<div class="tx-pair"><a class="tx-opt" href="${esc(bk)}" target="_blank" rel="noopener sponsored"><span class="eyebrow">Good value</span><b>Booking.com ↗</b><span class="small">Local licensed companies. Usually the cheaper choice.</span></a><a class="tx-opt" href="https://www.blacklane.com/" target="_blank" rel="noopener sponsored"><span class="eyebrow">Premium</span><b>Blacklane ↗</b><span class="small">Own vetted chauffeurs, business-class cars, 60 minutes' free wait. Usually pricier.</span></a></div>`,act:"",rec:rec==="private-driver"});
-  O.push({k:"apps",name:"Ride apps",desc:apps.length?apps.map(x=>`${x.app}${x.coverage?` (${x.coverage})`:""}`).join(", ")+".":"No ride apps pick up here.",act:"",rec:rec==="ride-app"});
+  O.push({k:"apps",name:"Ride apps",desc:apps.length?"These pick up at the airport:":"No ride apps pick up here.",html:apps.length?`<div class="app-links">${apps.map(x=>{const u=APP_LINKS[String(x.app||"").toLowerCase().replace(/\s+/g,"")];return u?`<a class="app-link" href="${u}" target="_blank" rel="noopener"><b>${esc(x.app)}</b>${x.coverage?`<span class="small">${esc(x.coverage)}</span>`:""}<span class="small">Get the app ↗</span></a>`:`<span class="app-link"><b>${esc(x.app)}</b>${x.coverage?`<span class="small">${esc(x.coverage)}</span>`:""}</span>`}).join("")}</div>`:"",act:"",rec:rec==="ride-app"});
   if(rec==="taxi")O.push({k:"taxi",name:"Taxi",desc:"Licensed taxis wait outside arrivals.",act:"",rec:true});
   const pick=O.find(o=>o.rec)||O[0],others=O.filter(o=>o!==pick);
   const pf=[t.minutes&&["Time",`About ${t.minutes} min`],["From",a.airport||"The airport"],pick.cost&&["Cost",pick.cost]].filter(Boolean);
@@ -2873,7 +2893,7 @@ function renderStay(id){
     </div>
     <div class="aside">
       ${WAITLIST?wlBookSoon(p):bookPanel(p)+`<button class="btn btn-secondary w-full" type="button" id="saveTrip">Save to a trip</button>`}
-      ${d?elink({id:"toDest",score:ds.total,photo:(()=>{const o=PROPS.find(z=>(d.stays||[]).includes(z.id)&&z.id!==p.id);return img(o||p)})(),eyebrow:"Destination",title:d.name,sub:(d.knownFor||[]).slice(0,1).map(cap).join("")}):""}
+      ${d?destCard(d,ds,(()=>{const o=PROPS.find(z=>(d.stays||[]).includes(z.id)&&z.id!==p.id);return img(o||p)})()):""}
     </div>
   </div>
   <div class="mobile-book"><span><b class="strong">${esc(money(p)||"Price on request")}</b> <span class="small on-ink-2">${money(p)?esc(unit(p)):""}</span></span><button class="btn btn-sm btn-light" type="button" id="mBook"${WAITLIST?" data-join":""}>${WAITLIST?"Join the waitlist":p.route==="concierge"?"Request with perks":"Check dates"}</button></div></div>`;
@@ -2897,7 +2917,8 @@ function renderStay(id){
   const so=document.getElementById("stayOrigin");if(so)so.onchange=e=>{const y=scrollY;setOrigin(e.target.value);renderStay(id);window.scrollTo(0,y)};
   if(!WAITLIST)det.querySelector("#mBook").onclick=()=>{const a=det.querySelector(".aside");a.scrollIntoView({behavior:"smooth"});if(p.route==="concierge"){if(rb&&!rb.hidden)conciergeForm(p)}else{const l=a.querySelector("a.btn");if(l)l.click()}};
 }
-function wlBookSoon(p){return `<div class="book ink edge-ink wl-soon"><span class="eyebrow">Booking · coming soon</span><h4>Book ${esc(p.name)} through Sana</h4><p class="small on-ink-2 m0">At launch you'll book straight from the report: with the hotel, online, or through our concierge when the trip qualifies.</p><div class="cg-assure"><span>Free to join</span><span>No card</span></div><button class="btn btn-primary w-full" type="button" data-join><span>Join the waitlist</span><span aria-hidden="true">→</span></button></div>`}
+function wlBookSoon(p){return `<div class="book ink concierge edge-ink aside-card"><div class="cg-photo"><img src="${esc(img(p))}" alt=""><span class="eyebrow">Booking · coming soon</span></div><div class="cg-body"><h4>Book ${esc(p.name)} through Sana</h4><p class="small on-ink-2 m0">At launch you'll book straight from the report: with the hotel, online, or through our concierge when the trip qualifies.</p><div class="cg-assure"><span>Free to join</span><span>No card</span></div><button class="btn btn-primary w-full" type="button" data-join><span>Join the waitlist</span><span aria-hidden="true">→</span></button></div></div>`}
+function destCard(d,ds,photo){return `<button class="book ink concierge edge-ink aside-card dest-card" type="button" id="toDest"><span class="cg-photo"><img src="${esc(photo)}" alt=""><span class="eyebrow">Destination</span></span><span class="cg-body"><span class="dc-head"><h4>${esc(d.name)}</h4><span class="elink-go" aria-hidden="true">→</span></span>${(d.knownFor||[]).length?`<span class="small on-ink-2">${esc((d.knownFor||[]).slice(0,2).map(cap).join(" · "))}</span>`:""}${ds?.total!=null?`<span class="dc-score"><b class="num">${ds.total}</b><small>/100</small><span>Place score</span></span>`:""}</span></button>`}
 function bookPanel(p){
   if(p.route==="concierge"){
     const perks=p.foraPerks?.text;
