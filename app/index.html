@@ -1574,6 +1574,7 @@ body.at-home .appbar{margin:0}
   .mpick button,select.select,.sel select{min-height:40px;height:40px}
   footer button,footer a{min-height:40px;display:inline-flex;align-items:center}
 }
+.nocap::first-letter,.nocap a::first-letter{text-transform:none}
 .chip-ok::before{content:"✓";margin-right:6px;color:var(--a11)}
 .chip-warn{border-color:var(--mixed)}
 .chip-warn::before{content:"!";margin-right:6px;color:var(--mixed);font-weight:600}
@@ -1964,14 +1965,15 @@ document.getElementById("restart").onclick=()=>{S.step=0;S.answers={};S.pick=new
 /* ---------- access ---------- */
 S.freeIds=new Set();
 const WAITLIST=true,SITE={
-  "owner": "[Your full legal name]",
-  "nif": "[Your NIF/NIE]",
-  "address": "[Postal address], Barcelona, Spain",
-  "email": "[Contact email]",
+  "owner": "",
+  "nif": "",
+  "address": "",
+  "email": "hello@nayaramarques.com",
   "brevoAction": "",
   "updated": "September 2026",
   "goatcounter": "",
-  "waitlistEndpoint": "https://sanawaitlist.nayara-marques.workers.dev"
+  "waitlistEndpoint": "https://sanawaitlist.nayara-marques.workers.dev",
+  "legalMode": "prelaunch"
 };
 function isOpen(p){ if(WAITLIST)return !!p.featured; if(S.unlocked||p.featured||S.freeIds.has(p.id))return true; if(S.scores){const top=[...PROPS].sort((a,b)=>S.scores.get(b.id).s-S.scores.get(a.id).s).slice(0,3);if(top.some(t=>t.id===p.id))return true} return false }
 const joinDlg=document.getElementById("join"),wlDlg=document.getElementById("waitlist");
@@ -2187,19 +2189,21 @@ function renderWhy(){
   av.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
 }
 const LEGAL={
-  notice:["Legal notice",()=>`<p>In line with Spain's Law 34/2002 on information society services and electronic commerce (LSSI-CE), this site is run by:</p>
-    <dl class="kv"><dt>Owner</dt><dd>${ph(SITE.owner)}</dd><dt>NIF</dt><dd>${ph(SITE.nif)}</dd><dt>Address</dt><dd>${ph(SITE.address)}</dd><dt>Email</dt><dd>${ph(SITE.email)}</dd></dl>
+  notice:["Legal notice",()=>`${SITE.legalMode==="prelaunch"?`<p>Sana is a pre-launch project run by its founder from Barcelona, Spain. It doesn't sell anything yet: today it offers free reports and a waitlist.</p>
+    <dl class="kv"><dt>Project</dt><dd>Sana</dd><dt>Based in</dt><dd>Barcelona, Spain</dd><dt>Email</dt><dd class="nocap"><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></dd></dl>
+    <p>Before Sana starts any commercial activity, this page will show the owner's full identification (name, tax number and address), as Spain's Law 34/2002 (LSSI-CE) requires.</p>`:`<p>In line with Spain's Law 34/2002 on information society services and electronic commerce (LSSI-CE), this site is run by:</p>
+    <dl class="kv"><dt>Owner</dt><dd>${ph(SITE.owner)}</dd><dt>NIF</dt><dd>${ph(SITE.nif)}</dd><dt>Address</dt><dd>${ph(SITE.address)}</dd><dt>Email</dt><dd>${ph(SITE.email)}</dd></dl>`}
     <h3>What Sana does</h3><p>Sana publishes independent reports on boutique hotels, wellness retreats and longevity clinics, and helps readers book them through partners.</p>
     <h3>Intellectual property</h3><p>Texts, scores, research and design belong to Sana. Photographs are mood images used under the Unsplash licence. Press icons belong to their publishers and are shown only to identify the article we cite. Hotel names and trademarks belong to their owners.</p>
     <h3>Accuracy and links</h3><p>Information comes from public sources, checked on the date shown, and can change. Confirm prices, availability and any medical details with the provider before you book. We are not responsible for the content of third-party sites we link to.</p>
     <h3>Law and courts</h3><p>These terms are governed by Spanish law. Disputes go to the courts of Barcelona, unless consumer law gives you the right to use the courts where you live.</p>`],
   privacy:["Privacy policy",()=>`<p>This policy explains what personal data Sana collects, why, and your rights under the EU General Data Protection Regulation (GDPR) and Spain's Organic Law 3/2018 (LOPDGDD).</p>
-    <h3>Who is responsible</h3><p>${ph(SITE.owner)}, ${ph(SITE.address)}. Contact: ${ph(SITE.email)}.</p>
+    <h3>Who is responsible</h3><p>${SITE.legalMode==="prelaunch"?`The founder of Sana, based in Barcelona, Spain. Contact: ${ph(SITE.email)}. Write to that address for anything about your data; you'll get a reply from a person.`:`${ph(SITE.owner)}, ${ph(SITE.address)}. Contact: ${ph(SITE.email)}.`}</p>
     <h3>What we collect and why</h3>
     <dl class="kv"><dt>Waitlist</dt><dd>Your email, and if you choose, what you're planning. We use it to tell you when Sana opens, to send occasional notes on new stays and seasonal picks, and to shape what we build first. Legal basis: your consent (GDPR article 6.1.a). Kept until you unsubscribe or ask us to delete it.</dd>
-    <dt>Visit statistics</dt><dd>GoatCounter (an EU-friendly, open-source service) counts page views without cookies and without building a profile of you. It stores the page, referrer, browser type and country, never your IP address. Legal basis: our legitimate interest in knowing which pages are useful (article 6.1.f).</dd>
+    ${SITE.goatcounter?`<dt>Visit statistics</dt><dd>GoatCounter (an EU-friendly, open-source service) counts page views without cookies and without building a profile of you. It stores the page, referrer, browser type and country, never your IP address. Legal basis: our legitimate interest in knowing which pages are useful (article 6.1.f).</dd>`:`<dt>Visit statistics</dt><dd>None yet. If we add them, we will use a cookie-free service and update this page first.</dd>`}
     <dt>In your browser</dt><dd>Your planner answers, dates and home airport are saved only in your own browser so the site remembers them. They are never sent to us.</dd></dl>
-    <h3>Who processes it for us</h3><p>Brevo (Sendinblue SAS, France) sends our emails and stores the waitlist in the EU. Cloudflare, Inc. hosts the site and measures visits; it may process data in the United States under the EU-US Data Privacy Framework and the European Commission's standard contractual clauses. We don't sell or share your data with anyone else, and we make no automated decisions about you.</p>
+    <h3>Who processes it for us</h3><p>When you join the waitlist, Cloudflare, Inc. passes your email to Notion Labs, Inc., where the waitlist is stored. GitHub, Inc. hosts the site. These companies may process data in the United States under the EU-US Data Privacy Framework and the European Commission's standard contractual clauses. We don't sell or share your data with anyone else, and we make no automated decisions about you.</p>
     <h3>Your rights</h3><p>You can ask to see, correct or delete your data, object to or limit how we use it, take a copy of it, and withdraw consent at any time. Every email has an unsubscribe link, or write to ${ph(SITE.email)}. If you think we've got it wrong, you can complain to the Spanish Data Protection Agency (AEPD) at aepd.es.</p>`],
   cookies:["Cookie policy",()=>`<p>Sana uses no advertising or tracking cookies.</p>
     <dl class="kv"><dt>Browser storage</dt><dd>We save your planner answers, dates, home airport and theme in your browser's local storage, only to provide features you ask for. This is exempt from consent under article 22.2 of the LSSI-CE. Clear it any time in your browser settings.</dd>
