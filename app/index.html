@@ -1091,7 +1091,7 @@ a.elink{text-decoration:none}
   .appbar nav .hide-s{display:none}
   .center{grid-template-columns:1fr;align-items:start}
   .chat{height:auto;min-height:0;max-height:72svh}
-  .rep{grid-template-columns:1fr!important}
+  .rep{grid-template-columns:minmax(0,1fr)!important}
   .aside{position:static}
   .routes,.members{grid-template-columns:1fr}
   .grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -1532,6 +1532,48 @@ body.at-home:not(.scrolled) .menu-btn{color:var(--on-ink);border-color:var(--gl-
 .card .over{text-shadow:0 1px 12px rgba(0,0,0,.35)}
 .card .photo .over::before{content:"";position:absolute;left:-14px;right:-14px;bottom:-12px;height:180%;z-index:-1;background:linear-gradient(0deg,rgba(18,18,15,.85),rgba(18,18,15,.35) 55%,rgba(18,18,15,0));border-radius:0 0 var(--r-lg) var(--r-lg);pointer-events:none}
 @media (max-width:760px){:root{--page-x:16px}.grid .card .photo,#previewGrid .card .photo,#grid .card .photo,.grid.three .card .photo{aspect-ratio:4/3}}
+/* grids never grow wider than the screen: children may shrink below their content width */
+.page>*,.rep>*,.rep-main>*,.hw-steps>*,.hw-step>*,.hw-copy>*,.band>*,.col-layout>*,.res>*{min-width:0}
+.page,.rep,.rep-main{grid-template-columns:minmax(0,1fr)}
+@media (min-width:1201px){.rep.has-index{grid-template-columns:160px minmax(0,1fr) 320px}}
+@media (min-width:901px) and (max-width:1200px){.rep.has-index,.rep{grid-template-columns:minmax(0,1fr) 320px}}
+.panel{grid-template-columns:minmax(0,1fr)}
+.panel>*,details.why,details.why>*,.parts,.parts li{min-width:0;max-width:100%}
+/* the navbar's bleed matches the body's own side padding, so it never overflows */
+:root{--body-pad:var(--s3)}
+@media (max-width:760px){:root{--body-pad:8px}}
+.appbar{margin-left:calc(var(--body-pad) * -1);margin-right:calc(var(--body-pad) * -1)}
+body.at-home .appbar{margin:0}
+/* comparison on phones: one card per feature, Sana first, the others as labelled rows */
+@media (max-width:640px){
+  .why-wrap{overflow:visible;border:0;border-radius:0}
+  table.why,table.why tbody,table.why tr,table.why th,table.why td{display:block;width:auto;min-width:0}
+  table.why thead{display:none}
+  table.why tr{margin:0 0 var(--s3);padding:var(--s4);border:1px solid var(--n5);border-radius:var(--r-lg);background:var(--n2)}
+  table.why th[scope="row"]{position:static;padding:0 0 var(--s3);font-size:var(--t-md);font-weight:500;background:none;border:0;text-align:left}
+  table.why td{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);padding:var(--s2) 0;border:0;border-top:1px solid var(--n5);background:none;text-align:right}
+  table.why td::before{content:attr(data-l);font-family:var(--mono);font-size:var(--t-2xs);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--n10);text-align:left}
+  table.why td.us{background:none}
+  table.why td.us::before{color:var(--a11)}
+}
+.cg-assure span{max-width:100%;white-space:normal}
+/* thumb-sized targets on phones */
+@media (max-width:760px){
+  .btn-sm,.talk-btn,.menu-btn,#appJoin{min-height:40px}
+  .talk-btn,.menu-btn{width:40px;height:40px}
+  .appbar .brand{padding:var(--s2) 0}
+  .legal-nav button{min-height:40px}
+  .crumbs button,.crumbs a{min-height:40px;display:inline-flex;align-items:center}
+  .seg button,.tabs button,[role="tab"]{min-height:40px}
+  .chat .btn-text{min-height:40px}
+  .foot-col button,.foot-col a,.foot-legal a,.foot-legal button{min-height:40px;display:inline-flex;align-items:center}
+  .ctile-act a,.ctile-act button{min-height:40px;display:inline-flex;align-items:center}
+  .sel select,select.input,.dates input{min-height:44px}
+  .map-link,a[href*="google.com/maps"]{min-height:40px;display:inline-flex;align-items:center}
+  .months span{min-height:40px}
+  .mpick button,select.select,.sel select{min-height:40px;height:40px}
+  footer button,footer a{min-height:40px;display:inline-flex;align-items:center}
+}
 .chip-ok::before{content:"✓";margin-right:6px;color:var(--a11)}
 .chip-warn{border-color:var(--mixed)}
 .chip-warn::before{content:"!";margin-right:6px;color:var(--mixed);font-weight:600}
@@ -2125,7 +2167,7 @@ function renderWhy(){
   const cols=["Sana","Booking sites","Review sites","AI chat planners","Travel advisors"];
   const rows=[["Only hand-picked stays",Y,N,N,N,Y],["Reviews distilled into themes, with numbers",Y,P,P,P,N],["Scored for your exact dates",Y,N,N,P,P],["Arrival, health and local practicalities",Y,P,P,P,Y],["Every fact linked to its source",Y,N,P,P,N],[WAITLIST?"Hotel's own rate plus perks (at launch)":"Hotel's own rate plus perks",Y,N,N,N,Y],["Free to use",Y,Y,Y,P,"Varies"]];
   av.innerHTML=pageShell("Why Sana","Less choice. Better answers.","Most travel tools show you everything. Sana shows you fewer places, researched properly, scored for when you actually go.",`
-    <div class="why-wrap"><table class="why"><thead><tr><th scope="col"><span class="sr">Feature</span></th>${cols.map((c,k)=>`<th scope="col"${k===0?' class="us"':""}>${c}</th>`).join("")}</tr></thead><tbody>${rows.map(([k,...v])=>`<tr><th scope="row">${k}</th>${v.map((x,i)=>`<td${i===0?' class="us"':""}>${x===Y?`<span class="yes">${ico("✓")}<span class="sr">Yes</span></span>`:x===N?`<span class="no" aria-label="No">–</span>`:`<span class="part">${x}</span>`}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+    <div class="why-wrap"><table class="why"><thead><tr><th scope="col"><span class="sr">Feature</span></th>${cols.map((c,k)=>`<th scope="col"${k===0?' class="us"':""}>${c}</th>`).join("")}</tr></thead><tbody>${rows.map(([k,...v])=>`<tr><th scope="row">${k}</th>${v.map((x,i)=>`<td data-l="${cols[i]}"${i===0?' class="us"':""}>${x===Y?`<span class="yes">${ico("✓")}<span class="sr">Yes</span></span>`:x===N?`<span class="no" aria-label="No">–</span>`:`<span class="part">${x}</span>`}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
     <p class="caveat m0">Comparisons describe what each type of service typically offers in 2026, not any single company.</p>
     ${(()=>{const src=totalSources(),rev=PROPS.reduce((n,p)=>n+reviewCount(p),0),per=Math.round(src/Math.max(1,PROPS.length)),n=x=>x.toLocaleString("en-GB"),fs=freeStats();
     return `<section class="why-sec"><div class="sec-head"><span class="eyebrow">What you actually get</span><h2>Research you'd never have time for.</h2><p>Four things every Sana report gives you, whichever stay you're weighing up.</p></div>
