@@ -1417,7 +1417,7 @@ body.at-home:not(.scrolled) .talk-btn{color:var(--on-ink);background:var(--gl-bg
 .talk-dot{display:none;width:7px;height:7px;border-radius:50%;background:var(--cta)}
 .talk-btn[aria-expanded="true"],body.at-home:not(.scrolled) .talk-btn[aria-expanded="true"]{background:#fff;color:#161512;border-color:#fff;box-shadow:0 4px 18px rgba(0,0,0,.18)}
 .talk-btn[aria-expanded="true"] .talk-dot{display:block;animation:livePulse 2.4s var(--ease) infinite}
-@media (max-width:640px){.talk-btn span{display:none}.talk-btn{padding:0 var(--s3)}}
+@media (max-width:640px){.talk-btn>span:not(.talk-orb){display:none}.talk-btn{padding:0;width:36px;justify-content:center}}
 /* page hero: one header for Collection, How it works and Journal */
 .page-hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:var(--s6);min-height:clamp(300px,34vw,420px);padding:var(--s7);border-radius:var(--r-xl);overflow:hidden;color:var(--on-ink);isolation:isolate;border:var(--edge-ink)}
 .page-hero .ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
@@ -1510,6 +1510,28 @@ body.at-home:not(.scrolled) .talk-btn{color:var(--on-ink);background:var(--gl-bg
 .onbanner li:first-child{padding-top:0}
 .onbanner .ob-search{display:inline-block;margin-top:var(--s2);font-size:var(--t-sm);color:var(--a11);text-decoration:underline;text-underline-offset:3px}
 .onbanner .ob-search:hover{color:var(--n12)}
+.menu-btn{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:36px;height:36px;border-radius:50%;border:1px solid var(--gl-bd);background:var(--gl-bg);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);cursor:pointer;color:var(--n12)}
+.menu-btn i{display:block;width:14px;height:1.5px;border-radius:2px;background:currentColor;transition:transform var(--dur-m) var(--ease)}
+.menu-btn[aria-expanded="true"] i:first-child{transform:translateY(3.25px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] i:last-child{transform:translateY(-3.25px) rotate(-45deg)}
+body.at-home:not(.scrolled) .menu-btn{color:var(--on-ink);border-color:var(--gl-bd-ink);background:var(--gl-bg-ink)}
+.mnav{position:fixed;inset:0;z-index:29;background:rgba(10,10,8,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);animation:fadeIn var(--dur-m) var(--ease) both}
+.mnav-in{position:absolute;left:var(--s3);right:var(--s3);top:calc(var(--sticky-top) - var(--s3));display:grid;gap:var(--s3);padding:var(--s5);border-radius:var(--r-xl);background:var(--ink-surface);border:var(--edge-ink);color:var(--on-ink);animation:sheetDown var(--dur-m) var(--ease) both}
+.mnav nav{display:grid;margin-bottom:var(--s3)}
+.mnav nav button{display:flex;align-items:baseline;gap:var(--s4);padding:var(--s4) 0;border:0;border-bottom:1px solid var(--veil-2);background:none;color:var(--on-ink);font:inherit;font-size:var(--t-h5);font-weight:300;text-align:left;cursor:pointer}
+.mnav nav .num{font-family:var(--mono);font-size:var(--t-2xs);color:var(--on-ink-2)}
+.mnav .btn .talk-orb{margin-right:var(--s2)}
+@keyframes fadeIn{from{opacity:0}}
+@keyframes sheetDown{from{opacity:0;transform:translateY(-8px)}}
+@media (max-width:760px){.appbar nav{display:none}.menu-btn{display:inline-flex}.appbar-right{gap:var(--s2)}#appJoin{padding:0 var(--s3)}}
+@media (min-width:761px){.mnav{display:none!important}}
+@media (max-width:760px){#v-home .stage>.center{padding-top:calc(var(--sticky-top) + var(--s5))}#v-home .stage>.top{visibility:hidden}}
+@media (max-width:760px){.stage>.photo::after{background:linear-gradient(180deg,rgba(20,19,16,.55) 0%,rgba(20,19,16,.62) 45%,rgba(20,19,16,.4) 70%,rgba(20,19,16,.6) 100%)}}
+/* card photos: a bottom shade so the name always reads */
+.card .photo>img:first-of-type+*,.card .photo{isolation:isolate}
+.card .over{text-shadow:0 1px 12px rgba(0,0,0,.35)}
+.card .photo .over::before{content:"";position:absolute;left:-14px;right:-14px;bottom:-12px;height:180%;z-index:-1;background:linear-gradient(0deg,rgba(18,18,15,.85),rgba(18,18,15,.35) 55%,rgba(18,18,15,0));border-radius:0 0 var(--r-lg) var(--r-lg);pointer-events:none}
+@media (max-width:760px){:root{--page-x:16px}.grid .card .photo,#previewGrid .card .photo,#grid .card .photo,.grid.three .card .photo{aspect-ratio:4/3}}
 .chip-ok::before{content:"✓";margin-right:6px;color:var(--a11)}
 .chip-warn{border-color:var(--mixed)}
 .chip-warn::before{content:"!";margin-right:6px;color:var(--mixed);font-weight:600}
@@ -1518,8 +1540,9 @@ body.at-home:not(.scrolled) .talk-btn{color:var(--on-ink);background:var(--gl-bg
 <header class="appbar" id="appbar" hidden>
   <button class="brand" type="button" data-go="home">SANA</button>
   <nav aria-label="Main"><button type="button" data-go="collection">Collection</button><button type="button" data-go="how" class="hide-s">How it works</button><button type="button" data-go="why" class="hide-s">Why Sana</button><button type="button" data-go="journal" class="hide-s">Journal</button><button type="button" data-go="trips" id="navTrips">My trips</button><button type="button" data-go="signin" id="navAcct">Sign in</button></nav>
-  <div class="appbar-right"><button class="talk-btn" type="button" data-talk aria-expanded="false"><span class="talk-orb" aria-hidden="true"><i></i></span><span>Talk with Sana</span></button><button class="btn btn-primary btn-sm" type="button" data-join id="appJoin">Join free</button></div>
+  <div class="appbar-right"><button class="talk-btn" type="button" data-talk aria-expanded="false"><span class="talk-orb" aria-hidden="true"><i></i></span><span>Talk with Sana</span></button><button class="btn btn-primary btn-sm" type="button" data-join id="appJoin">Join free</button><button class="menu-btn" type="button" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><i></i><i></i></button></div>
 </header>
+<div class="mnav" id="mnav" hidden><div class="mnav-in" role="dialog" aria-label="Menu"><nav aria-label="Menu"><button type="button" data-go="collection"><span class="num">01</span>Collection</button><button type="button" data-go="how"><span class="num">02</span>How it works</button><button type="button" data-go="why"><span class="num">03</span>Why Sana</button><button type="button" data-go="journal"><span class="num">04</span>Journal</button></nav><button class="btn btn-line w-full" type="button" data-talk><span class="talk-orb" aria-hidden="true"><i></i></span>Talk with Sana</button><button class="btn btn-primary w-full" type="button" data-join>Request private access</button></div></div>
 
 <div id="v-home" class="view">
 <section class="stage" id="plan">
@@ -2246,6 +2269,12 @@ addEventListener("scroll",onNavScroll,{passive:true});
 
 /* ---------- floating home chat ---------- */
 const chatEl=document.querySelector("#plan .chat"),chatHome=chatEl.parentElement,chatFloat=document.getElementById("chatFloat");
+const mnav=document.getElementById("mnav"),menuBtn=document.getElementById("menuBtn");
+function setMenu(open){if(!mnav)return;mnav.hidden=!open;menuBtn.setAttribute("aria-expanded",open);menuBtn.setAttribute("aria-label",open?"Close menu":"Open menu");document.body.classList.toggle("menu-open",open);if(open)mnav.querySelector("nav button")?.focus()}
+menuBtn?.addEventListener("click",()=>setMenu(mnav.hidden));
+mnav?.addEventListener("click",e=>{if(e.target===mnav||e.target.closest("button"))setMenu(false);const g=e.target.closest("[data-go]");if(g)go(g.dataset.go)});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&mnav&&!mnav.hidden)setMenu(false)});
+addEventListener("hashchange",()=>setMenu(false));
 const talkState=o=>document.querySelectorAll(".appbar [data-talk]").forEach(b=>b.setAttribute("aria-expanded",o));
 function openChatFloat(){chatFloat.querySelector(".chat-float-in").appendChild(chatEl);chatFloat.hidden=false;talkState(true);chatEl.querySelector(".opt,button")?.focus()}
 function closeChatFloat(){if(chatFloat.hidden)return;chatHome.appendChild(chatEl);chatFloat.hidden=true;talkState(false)}
