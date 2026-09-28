@@ -109,7 +109,7 @@ img{max-width:100%}
 .sec-head p{margin:0;color:var(--n10);font-size:var(--t-lead);line-height:1.6;max-width:58ch}
 .photo{position:relative;overflow:hidden;background:var(--photo-bg)}
 .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.photo img.c{opacity:0;transition:opacity .7s ease}
+.photo img.c{opacity:0;transition:opacity .7s var(--ease)}
 .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,27,22,.1),rgba(28,27,22,0) 38%,rgba(28,27,22,.55));pointer-events:none}
 .credit{position:absolute;z-index:2;right:16px;bottom:12px;font-size:var(--t-2xs);color:var(--veil-7)}
 .lock-ico{width:13px;height:13px;flex:none}
@@ -143,7 +143,7 @@ img{max-width:100%}
 .progress i.on{background:var(--on-ink)}
 .chat-log{flex:1 1 auto;min-height:0;overflow-y:auto;padding:var(--s4) var(--s4) var(--s2);display:flex;flex-direction:column;gap:var(--s3)}
 .chat-log>:first-child{margin-top:auto}
-.msg{max-width:86%;padding:var(--s3) var(--s4);border-radius:var(--r-lg);font-size:var(--t-body);line-height:1.45;animation:rise .35s ease both}
+.msg{max-width:86%;padding:var(--s3) var(--s4);border-radius:var(--r-lg);font-size:var(--t-body);line-height:1.45;animation:rise .35s var(--ease) both}
 .msg.bot{background:var(--veil-9);color:var(--ink-text);border-bottom-left-radius:6px;align-self:flex-start}
 .msg.me{background:var(--olive-veil);color:var(--on-ink);border-bottom-right-radius:6px;align-self:flex-end}
 @keyframes rise{from{transform:translateY(6px);opacity:.3}to{transform:none;opacity:1}}
@@ -179,10 +179,10 @@ img{max-width:100%}
 .card{display:grid;gap:var(--s3);align-content:start;background:none;border:0;padding:0;text-align:left;border-radius:var(--r-lg);color:var(--n12)}
 .card .photo{aspect-ratio:4/5;border-radius:var(--r-lg)}
 .grid.three .card .photo{aspect-ratio:5/6}
-.card .photo img{transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .7s ease}
+.card .photo img{transition:transform .9s var(--var(--ease)),opacity .7s var(--ease)}
 .card:hover .photo img{transform:scale(1.04)}
 .card:hover .photo img.c,.card:focus-visible .photo img.c{opacity:1}
-.dcard .photo img{transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .7s ease}
+.dcard .photo img{transition:transform .9s var(--var(--ease)),opacity .7s var(--ease)}
 .dcard:hover .photo img{transform:scale(1.04)}
 .dcard:hover .photo img.c,.dcard:focus-visible .photo img.c{opacity:1}
 .card .tagrow{position:absolute;z-index:2;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:var(--s2)}
@@ -236,7 +236,7 @@ img{max-width:100%}
 .steps .st p{margin:0;font-weight:500;line-height:1.45}
 .steps .bullets{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3) var(--s6);padding-top:var(--s1);color:var(--n10)}
 footer p{margin:0;max-width:72ch}
-.joinbar{position:fixed;z-index:20;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,160%);display:flex;align-items:center;gap:var(--s4);background:var(--ink-surface);color:var(--on-ink);border-radius:var(--r-pill);padding:var(--s2) var(--s2) var(--s2) var(--s5);box-shadow:var(--elev-5);transition:transform .45s cubic-bezier(.2,.8,.2,1);max-width:calc(100% - 24px)}
+.joinbar{position:fixed;z-index:20;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,160%);display:flex;align-items:center;gap:var(--s4);background:var(--ink-surface);color:var(--on-ink);border-radius:var(--r-pill);padding:var(--s2) var(--s2) var(--s2) var(--s5);box-shadow:var(--elev-5);transition:transform .45s var(--var(--ease));max-width:calc(100% - 24px)}
 .joinbar.show{transform:translate(-50%,0)}
 .joinbar span{font-size:var(--t-sm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
@@ -244,7 +244,7 @@ footer p{margin:0;max-width:72ch}
 dialog{border:0;padding:0;background:var(--n1);color:var(--n12);max-width:none;max-height:none}
 dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px)}
 dialog.sheet{width:calc(100% - 24px);height:calc(100% - 24px);margin:12px;border-radius:var(--r-xl);overflow:auto}
-dialog.sheet[open],dialog.modal[open]{animation:sheetUp .45s cubic-bezier(.2,.8,.2,1)}
+dialog.sheet[open],dialog.modal[open]{animation:sheetUp .45s var(--var(--ease))}
 @keyframes sheetUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 .sheet-head{position:sticky;top:0;z-index:10;background:var(--n1);display:grid;gap:var(--s3);padding:var(--s5) var(--gutter) var(--s3);border-bottom:1px solid var(--n5)}
 .sheet-head h2{font-weight:300;font-size:clamp(30px,4vw,46px);letter-spacing:-.02em;line-height:1;margin:0}
@@ -458,7 +458,7 @@ details.srcs div{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s3);margin-top:
 /* the home chat, floating over any page in its home position */
 .chat-float{position:fixed;inset:auto var(--s5) var(--s5) auto;z-index:60;pointer-events:none;background:none}
 .chat-float-in{width:min(440px,calc(100vw - 32px));display:block}
-.chat-float .chat{pointer-events:auto;animation:rise .35s ease both;box-shadow:var(--elev-2);background:var(--ink-surface);border:var(--edge-ink);height:min(620px,calc(100svh - 120px));min-height:0}
+.chat-float .chat{pointer-events:auto;animation:rise .35s var(--ease) both;box-shadow:var(--elev-2);background:var(--ink-surface);border:var(--edge-ink);height:min(620px,calc(100svh - 120px));min-height:0}
 .chat-close{display:none}
 body.noscroll{overflow:hidden}
 .chat-float .chat-close{display:inline-grid}
@@ -847,7 +847,7 @@ a.ctile:hover{background:var(--n4)}
 .j-lead-text b{font-weight:300;font-size:var(--t-h3);line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
 .j-dek{color:var(--n11);font-size:var(--t-md);text-wrap:pretty}
 .j-read{font-size:var(--t-sm);color:var(--n12);display:inline-flex;gap:var(--s2);align-items:center}
-.j-lead:hover .j-lead-photo img,.j-card:hover img{transform:scale(1.02)}.j-lead img,.j-card img{transition:transform .6s ease}
+.j-lead:hover .j-lead-photo img,.j-card:hover img{transform:scale(1.02)}.j-lead img,.j-card img{transition:transform .6s var(--ease)}
 .j-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s5)}
 .j-card{display:grid;gap:var(--s2);align-content:start;border:0;padding:0;background:none;text-align:left;color:inherit}
 .j-card-photo{aspect-ratio:4/3;border-radius:var(--r-lg);overflow:hidden;margin-bottom:var(--s2);max-width:100%}
@@ -904,8 +904,8 @@ body.wl #navTrips,body.wl #navAcct,body.wl #homeAcct,body.wl #edToggle,body.wl [
 @media (max-width:640px){.how-steps li{grid-template-columns:40px minmax(0,1fr)}.how-steps li>.pill{grid-column:2;justify-self:start}}
 
 /* soft unfold transition */
-.stage.leaving{transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s ease;transform:translateY(-4%) scale(.985);opacity:0}
-.view.enter{animation:viewIn .8s cubic-bezier(.2,.7,.2,1) both}
+.stage.leaving{transition:transform .45s var(--var(--ease)),opacity .45s var(--ease);transform:translateY(-4%) scale(.985);opacity:0}
+.view.enter{animation:viewIn .8s var(--var(--ease)) both}
 @keyframes viewIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.stage.leaving{transition:none}.view.enter{animation:none}}
 
@@ -986,7 +986,7 @@ body.at-home.scrolled .appbar{left:0;right:0;top:0;border-radius:0;background:co
 .hw-for{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s5)}
 .hw-for>div{display:grid;gap:var(--s2);align-content:start}
 .hw-for-photo{margin:0 0 var(--s3);border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/3;max-width:100%}
-.hw-for-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.hw-for-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s var(--var(--ease))}
 .hw-for>div:hover .hw-for-photo img{transform:scale(1.03)}
 .hw-for h3{margin:0;font-weight:400;font-size:var(--t-h5)}
 .hw-for p{margin:0;color:var(--n11);font-size:var(--t-md)}
@@ -1060,7 +1060,7 @@ a.elink{text-decoration:none}
 .uv-track i{position:absolute;inset:0 auto 0 0;width:calc(var(--v)*100%);border-radius:inherit;background:linear-gradient(90deg,var(--a9),var(--a11))}
 /* motion: bars grow in once, calm and short */
 @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.track i,.uv-track i,.mkt .track i,.dims .track i{transform-origin:left center;animation:grow .9s cubic-bezier(.2,.7,.2,1) both}
+.track i,.uv-track i,.mkt .track i,.dims .track i{transform-origin:left center;animation:grow .9s var(--var(--ease)) both}
 @media (prefers-reduced-motion:reduce){.track i,.uv-track i{animation:none}}
 .prep{list-style:none;margin:0;padding:0;display:grid}
 .prep li{display:grid;grid-template-columns:var(--label-col) minmax(0,1fr) auto;gap:0;align-items:start;padding:var(--s3) 0;border-bottom:1px solid var(--n5)}
@@ -1086,7 +1086,7 @@ a.elink{text-decoration:none}
 @media (max-width:900px){
   .col-layout{grid-template-columns:1fr}
   #openSide{display:inline-flex}
-  .side{position:fixed;inset:auto 0 0 0;top:auto;z-index:40;max-height:82svh;background:var(--n1);border-radius:var(--r-xl) var(--r-xl) 0 0;padding:var(--s5) var(--s4) calc(var(--s5) + env(safe-area-inset-bottom,0px));box-shadow:var(--elev-4);transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .side{position:fixed;inset:auto 0 0 0;top:auto;z-index:40;max-height:82svh;background:var(--n1);border-radius:var(--r-xl) var(--r-xl) 0 0;padding:var(--s5) var(--s4) calc(var(--s5) + env(safe-area-inset-bottom,0px));box-shadow:var(--elev-4);transform:translateY(105%);transition:transform .35s var(--var(--ease))}
   .side.open{transform:none}
   .appbar nav .hide-s{display:none}
   .center{grid-template-columns:1fr;align-items:start}
@@ -1152,7 +1152,7 @@ a.elink{text-decoration:none}
 .chat-count{font-family:var(--mono);font-size:var(--t-2xs);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--on-ink-2);opacity:.8}
 .chat-head .who{flex-wrap:wrap}
 .msg.typing{display:inline-flex;gap:var(--s1);align-items:center;padding:var(--s3) var(--s4);width:auto}
-.msg.typing i{width:6px;height:6px;border-radius:var(--r-round);background:currentColor;opacity:.35;animation:blink 1.2s infinite ease-in-out}
+.msg.typing i{width:6px;height:6px;border-radius:var(--r-round);background:currentColor;opacity:.35;animation:blink 1.2s infinite var(--ease)}
 .msg.typing i:nth-child(2){animation-delay:.15s}.msg.typing i:nth-child(3){animation-delay:.3s}
 @keyframes blink{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:.9;transform:translateY(-2px)}}
 @media (prefers-reduced-motion:reduce){.msg.typing i{animation:none}}
@@ -1230,9 +1230,9 @@ a.elink{text-decoration:none}
 .wl-body .cg-facts b{color:var(--on-ink)}
 .wl-body .check{color:var(--on-ink)}
 .wl-body .input{background:var(--veil-1);border-color:var(--veil-2);color:var(--on-ink)}
-body.at-home .appbar,body.at-home.scrolled .appbar{left:0;right:0;top:0;margin:0;border-radius:0;border-bottom:1px solid transparent;padding:calc(var(--s3) * 2) calc(var(--band-x) + var(--s3)) var(--s3);transition:background-color .45s ease,backdrop-filter .45s ease,-webkit-backdrop-filter .45s ease,border-color .45s ease,padding .45s ease}
+body.at-home .appbar,body.at-home.scrolled .appbar{left:0;right:0;top:0;margin:0;border-radius:0;border-bottom:1px solid transparent;padding:calc(var(--s3) * 2) calc(var(--band-x) + var(--s3)) var(--s3);transition:background-color .45s var(--ease),backdrop-filter .45s var(--ease),-webkit-backdrop-filter .45s var(--ease),border-color .45s var(--ease),padding .45s var(--ease)}
 body.at-home.scrolled .appbar{padding-top:var(--s3);background:color-mix(in srgb,var(--n1) 86%,transparent);border-bottom-color:var(--n5)}
-.appbar .brand,.appbar nav,.appbar nav button{transition:color .45s ease,border-color .45s ease,background-color .25s ease}
+.appbar .brand,.appbar nav,.appbar nav button{transition:color .45s var(--ease),border-color .45s var(--ease),background-color .25s var(--ease)}
 @media (prefers-reduced-motion:reduce){body.at-home .appbar,.appbar .brand,.appbar nav,.appbar nav button{transition:none}}
 .wl-done{display:grid;gap:var(--s6)}
 dialog.modal.wl-dlg{width:min(560px,calc(100% - 24px))}
@@ -1244,8 +1244,8 @@ dialog.modal.wl-dlg{width:min(560px,calc(100% - 24px))}
 .wl-steps li:last-child{border-bottom:1px solid var(--veil-2)}
 .wl-steps .num{font-family:var(--mono);font-size:var(--t-2xs);color:var(--on-ink-2);padding-top:3px}
 .wl-steps small{display:block;color:var(--on-ink-2);font-size:var(--t-sm)}
-.wl-seal{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--cta);color:#fff;box-shadow:0 0 0 8px color-mix(in srgb,var(--cta) 22%,transparent);animation:seal .7s cubic-bezier(.2,.9,.3,1.3) both}
-.wl-seal svg{stroke-dasharray:30;stroke-dashoffset:30;animation:tick .5s .35s ease forwards}
+.wl-seal{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--cta);color:#fff;box-shadow:0 0 0 8px color-mix(in srgb,var(--cta) 22%,transparent);animation:seal .7s var(--var(--ease)) both}
+.wl-seal svg{stroke-dasharray:30;stroke-dashoffset:30;animation:tick .5s .35s var(--ease) forwards}
 @keyframes seal{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
 @keyframes tick{to{stroke-dashoffset:0}}
 .wl-done .row .btn{flex:1}
@@ -1298,7 +1298,7 @@ dialog.modal.wl-dlg{width:min(560px,calc(100% - 24px))}
    tag (filled neutral, no icon): attributes · photo label (glass, mono): category over images · topic (outline, no icon): news type */
 .xp .pill.pill-accent,.when-pill{display:inline-flex;align-items:center;gap:var(--s2);font-family:var(--font);text-transform:none;letter-spacing:0;font-size:var(--t-sm);font-weight:500;padding:var(--s1) var(--s3);border-radius:var(--r-pill);background:var(--a3);color:var(--a11);border:1px solid color-mix(in srgb,var(--a11) 22%,transparent);white-space:nowrap}
 .xp .pill.pill-accent::before,.when-pill::before{content:"";width:14px;height:14px;flex:none;background:currentColor;opacity:.85;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27%3E%3Crect x=%274%27 y=%275%27 width=%2716%27 height=%2716%27 rx=%272%27/%3E%3Cpath d=%27M16 3v4M8 3v4M4 11h16%27/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27%3E%3Crect x=%274%27 y=%275%27 width=%2716%27 height=%2716%27 rx=%272%27/%3E%3Cpath d=%27M16 3v4M8 3v4M4 11h16%27/%3E%3C/svg%3E") center/contain no-repeat}
-:root{--page-top:calc(var(--sec-gap) + var(--sec-space))}
+:root{--ease:cubic-bezier(.22,1,.36,1);--ease-io:cubic-bezier(.65,0,.35,1);--dur-s:.2s;--dur-m:.45s;--dur-l:.8s;--page-top:calc(var(--sec-gap) + var(--sec-space))}
 .view>.page{padding-top:var(--page-top)}
 .view>.page>.col-top{padding-top:0}
 @media (max-width:600px){:root{--page-top:var(--sec-gap)}}
@@ -1348,6 +1348,13 @@ a.app-link:hover{border-color:var(--n8)}
 .aside-card,.aside-card .cg-body,.aside-card .dc-head,.aside-card .dc-head h4{min-width:0}
 .aside-card .small{overflow-wrap:break-word}
 .dc-score{max-width:100%;flex-wrap:wrap}
+.wl-rows{margin:0;display:grid}
+.wl-rows>div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:var(--s4);align-items:baseline;padding:var(--s3) 0;border-top:1px solid var(--veil-2)}
+.wl-rows>div:last-child{border-bottom:1px solid var(--veil-2)}
+.wl-rows dt{font-family:var(--mono);font-size:var(--t-2xs);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--on-ink-2)}
+.wl-rows dd{margin:0;font-size:var(--t-md);color:var(--on-ink)}
+.wl-body .muted{font-size:var(--t-md);line-height:1.6;max-width:46ch}
+.wl-fine{text-align:center}
 .chip-ok::before{content:"✓";margin-right:6px;color:var(--a11)}
 .chip-warn{border-color:var(--mixed)}
 .chip-warn::before{content:"!";margin-right:6px;color:var(--mixed);font-weight:600}
@@ -1744,7 +1751,8 @@ const WAITLIST=true,SITE={
   "email": "[Contact email]",
   "brevoAction": "",
   "updated": "September 2026",
-  "goatcounter": ""
+  "goatcounter": "",
+  "waitlistEndpoint": ""
 };
 function isOpen(p){ if(WAITLIST)return !!p.featured; if(S.unlocked||p.featured||S.freeIds.has(p.id))return true; if(S.scores){const top=[...PROPS].sort((a,b)=>S.scores.get(b.id).s-S.scores.get(a.id).s).slice(0,3);if(top.some(t=>t.id===p.id))return true} return false }
 const joinDlg=document.getElementById("join"),wlDlg=document.getElementById("waitlist");
@@ -1917,11 +1925,11 @@ function renderHow(){
       ${step("02","Read the full report","Open one page per stay: the place, guests, treatments, arrival, costs, health and local life.","Reads the reviews, the press and the official data, then distils them into themes with numbers. Every fact links to its source.","One report instead of forty tabs, and you see what guests criticise, not only what they praise.",`<span class="eyebrow">See a real one</span>${[["stay-"+p.id,img(p),"Stay report",p.name,`${d?.name||p.city}, ${p.country}`],...(()=>{const d2=[...DESTS].filter(z=>z.id!==d.id).sort((a,b)=>destScore(b).total-destScore(a).total)[0],p2=PROPS.find(x=>(d2.stays||[]).includes(x.id));return [["dest-"+d2.id,img(p2),"Destination report",d2.name,`Place score ${destScore(d2).total}/100`]]})()].map(([h,im,ey,t,sub])=>`<a class="elink raised has-photo" href="${esc(location.href.split("#")[0])}#${esc(h)}" target="_blank" rel="noopener"><span class="elink-photo"><img src="${esc(im)}" alt=""></span><span class="elink-body"><span class="eyebrow">${ey}</span><b>${esc(t)}</b><span class="small">${esc(sub)}</span></span><span class="elink-go" aria-hidden="true">↗</span></a>`).join("")}`)}
       ${step("03","Score your dates","Pick your dates, or let us start with next month.","Turns weather, season, crowds, events and your arrival day into one timing score that changes with your dates.","You find out it's rainy season before you book, not when you land.",i?`<span class="eyebrow">${esc(p.name)} · mid-${MONTHS_LONG[i.m-1]}</span><div class="dscore"><div class="ring" style="--v:${i.score}"><b class="num">${i.score}</b></div><div class="stack-2"><h4>${esc(i.label)}</h4><p class="small m0">${i.inSeason?`${MONTHS_LONG[i.m-1]} is in its best season.`:`${MONTHS_LONG[i.m-1]} is outside its best season.`}${i.c?` Around ${Math.round(i.c.highC)}°C by day.`:""}</p></div></div><div class="hw-bars hw-parts">${(i.parts||[]).map(([k,v,max,why])=>`<div><span>${esc(k)}</span><span class="track"><i style="width:${Math.round(v/max*100)}%"></i></span><b class="num">${v}/${max}</b><p class="small m0">${esc(cap(why||""))}</p></div>`).join("")}</div><p class="small m0">Four parts, 100 points. Change the dates and every part updates.</p>`:"")}
       ${step("04","Compare places, not adverts","Look at where you'd go, not just where you'd sleep.","Scores every destination on six parts: access, food, attractions, crowds, unique experiences and how smooth it is on the ground.","A place's quality never changes with your dates, so we keep the two apart and show you both.",`<span class="eyebrow">${esc(d.name)} · place score ${ds.total}</span><div class="hw-bars">${ds.dims.map(([k,v])=>`<div><span>${k}</span><span class="track"><i style="width:${v??0}%"></i></span><b class="num">${v??"–"}</b></div>`).join("")}</div>`)}
-      ${step("05",`Book your way, better${WAITLIST?' <span class="pill hw-soon">At launch</span>':""}`,"Book easy stays online, or ask our concierge for the exclusive ones.","Links easy stays to live prices. For the most exclusive stays, our concierge books at the hotel's own public rate and confirms the perks in writing within 24 hours.","Same rate, more included, and a person to reply to if plans change.",cp?`<span class="eyebrow">${esc(cp.name)} · with Sana</span><h4 class="hw-h4">Same rate. More included.</h4><div class="cg-assure hw-perks">${perks.map(x=>`<span>${esc(x)}</span>`).join("")}</div><p class="small m0">You pay the hotel directly. No card to ask.</p>`:"")}
+      ${step("05",`Book your way, with more included${WAITLIST?' <span class="pill hw-soon">At launch</span>':""}`,"Book easy stays online, or ask our concierge for the exclusive ones.","Links easy stays to live prices. For the most exclusive stays, our concierge books at the hotel's own public rate and confirms the perks in writing within 24 hours.","Same rate, more included, and a person to reply to if plans change.",cp?`<span class="eyebrow">${esc(cp.name)} · with Sana</span><h4 class="hw-h4">Same rate. More included.</h4><div class="cg-assure hw-perks">${perks.map(x=>`<span>${esc(x)}</span>`).join("")}</div><p class="small m0">You pay the hotel directly. We never ask for your card.</p>`:"")}
       ${step("06","Plan the trip","Save stays and places, pin what matters and share it with the people you travel with.","Organises everything from your reports into one board: where to eat, what to do, treatments, events in your month, getting there, emergency numbers.","The trip in one place, ready to export to your notes or an AI project.",`<span class="eyebrow">Your trip · pinned</span><ul class="klist">${(p.nearby?.restaurants||[]).slice(0,1).concat((p.nearby?.activities||[]).slice(0,2)).map(x=>`<li><div><b class="strong">${esc(x.name)}</b><span class="from">${esc(p.name)}${x.distance?` · ${esc(x.distance)}`:""}</span></div><span class="pin" aria-hidden="true">★</span></li>`).join("")}</ul>${WAITLIST?`<span class="pill pill-line pill-soon">Opens at launch</span>`:""}`)}
     </div>
     <div class="sec-head"><span class="eyebrow">Made for</span><h2>People who care how it's done.</h2></div>
-    <div class="hw-for"><div><figure class="hw-for-photo"><img src="img/room.jpg" alt="A wood-panelled hotel room in Stockholm" loading="lazy"></figure><h3>You plan around the details</h3><p>The week, the room, the transfer, the treatment. Sana answers those first.</p></div><div><figure class="hw-for-photo"><img src="img/drive.jpg" alt="A woman laughing in a sunlit car on a road trip" loading="lazy"></figure><h3>You'd rather read one report</h3><p>Than forty tabs, three forums and a brochure that only says the good parts.</p></div><div><figure class="hw-for-photo"><img src="img/beach.jpg" alt="A woman reading on a blanket by the sea" loading="lazy"></figure><h3>You want expert intel</h3><p>Deep research from expert travellers who understand what makes a trip smooth, not only what looks good in photos.</p></div></div>
+    <div class="hw-for"><div><figure class="hw-for-photo"><img src="img/room.jpg" alt="A wood-panelled hotel room in Stockholm" loading="lazy"></figure><h3>You plan around the details</h3><p>The week, the room, the transfer, the treatment. Sana answers those first.</p></div><div><figure class="hw-for-photo"><img src="img/drive.jpg" alt="A woman laughing in a sunlit car on a road trip" loading="lazy"></figure><h3>You'd rather read one report</h3><p>Than forty tabs, three forums and a brochure that only tells you the good parts.</p></div><div><figure class="hw-for-photo"><img src="img/beach.jpg" alt="A woman reading on a blanket by the sea" loading="lazy"></figure><h3>You want an expert's view</h3><p>Deep research from expert travellers who understand what makes a trip smooth, not only what looks good in photos.</p></div></div>
     <div class="book ink concierge hw-deal">
       <div class="cg-photo hw-deal-band"><img src="img/leaf2.jpg" alt=""><span class="eyebrow">The deal</span></div>
       <div class="cg-body">
@@ -1983,28 +1991,36 @@ function renderLegal(k){const L=LEGAL[k];if(!L){renderNotFound();return}
   av.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
 }
 /* ---------- public preview (waitlist) mode ---------- */
+/* sign-ups: the Notion forwarder (SITE.waitlistEndpoint) or a Brevo form; returns true when saved */
+const LIST_LIVE=!!(SITE.waitlistEndpoint||SITE.brevoAction);
+async function joinList(email,source,form){
+  if(SITE.waitlistEndpoint){try{const res=await fetch(SITE.waitlistEndpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,consent:true,source,website:form?.querySelector("[name=website]")?.value||""})});return res.ok}catch(_){return false}}
+  if(SITE.brevoAction&&form){try{await fetch(SITE.brevoAction,{method:"POST",mode:"no-cors",body:new FormData(form)});return true}catch(_){return false}}
+  return false}
 function openWaitlist(note){const mi=joinDlg.querySelector(".modal-in");joinDlg.classList.add("wl-dlg");
   mi.innerHTML=`<div class="cg-photo wl-photo"><img src="img/room.jpg" alt=""><span class="eyebrow">Sana · private preview</span><button class="wl-x" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
   <div class="wl-body">
   <div class="stack-2"><h3 id="joinTitle">${esc(note||"Get in first.")}</h3>
-  <p class="muted m0">Full reports on the best-reviewed boutique hotels in the world: what guests praise, what they quietly criticise, and whether your dates are right. Six are open now; the waitlist hears first when all 29 open.</p></div>
-  <div class="cg-facts lined"><div><span class="eyebrow">Free now</span><b>Six full reports</b></div><div><span class="eyebrow">At launch</span><b>All 29, plus booking</b></div><div><span class="eyebrow">Your inbox</span><b>One email at launch</b></div></div>
-  <form id="wlForm" class="stack-3" novalidate><input class="input" id="wlEmail" name="EMAIL" type="email" required autocomplete="email" placeholder="Your email" aria-label="Your email">
+  <p class="muted m0">Full reports on the world's best-reviewed boutique hotels. Six are open today; the waitlist hears first when all 29 open.</p></div>
+  <dl class="wl-rows"><div><dt>Free now</dt><dd>Six full reports</dd></div><div><dt>At launch</dt><dd>All 29 reports and booking</dd></div><div><dt>Your inbox</dt><dd>One email when we open</dd></div></dl>
+  <form id="wlForm" class="stack-3" novalidate><input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><input class="input" id="wlEmail" name="EMAIL" type="email" required autocomplete="email" placeholder="Your email" aria-label="Your email">
   <label class="check"><input type="checkbox" id="wlConsent" name="OPT_IN" value="1"> Email me when Sana opens. I can unsubscribe any time.</label>
   <p class="warnline m0" id="wlErr" hidden></p><button class="btn btn-primary" type="submit"><span>Join the waitlist</span><span aria-hidden="true">→</span></button></form>
-  <div class="row start gap-2"><div class="cg-assure"><span>Free</span><span>No card</span></div><p class="fine m0">See our <button class="linkbtn" type="button" data-go="legal-privacy">privacy policy</button>.</p></div>
+  <p class="fine m0 wl-fine">Free, no card needed. Read our <button class="linkbtn" type="button" data-go="legal-privacy">privacy policy</button>.</p>
   </div>`;
   mi.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>joinDlg.close());
   mi.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{joinDlg.close();go(b.dataset.go)});
   mi.querySelector("#wlForm").addEventListener("submit",async e=>{e.preventDefault();const em=mi.querySelector("#wlEmail"),er=mi.querySelector("#wlErr");er.hidden=true;
     if(!em.checkValidity()||!em.value){er.textContent="Enter a valid email address.";er.hidden=false;return}
     if(!mi.querySelector("#wlConsent").checked){er.textContent="Tick the box so we can email you when Sana opens.";er.hidden=false;return}
-    try{if(SITE.brevoAction)await fetch(SITE.brevoAction,{method:"POST",mode:"no-cors",body:new FormData(e.target)})}catch(_){}
+    const btn=e.target.querySelector("[type=submit]");btn.disabled=true;
+    const ok=await joinList(em.value.trim(),"App",e.target);
+    if(LIST_LIVE&&!ok){btn.disabled=false;er.textContent="That didn't go through. Check your connection and try again.";er.hidden=false;return}
     const first=PROPS.find(p=>p.featured);
     mi.innerHTML=`<div class="cg-photo wl-photo"><img src="img/pool.jpg" alt=""><span class="eyebrow">Sana · private preview</span><button class="wl-x" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="wl-body wl-done">
       <div class="wl-seal" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-      <div class="stack-2"><h3>You're in.</h3><p class="muted m0">${SITE.brevoAction?"Welcome to Sana. You'll be among the first through the door when every report opens.":"Preview only: this form isn't connected yet, so nothing was sent."}</p></div>
-      <ol class="wl-steps"><li><span class="num">01</span><div>Confirm your email<small>${SITE.brevoAction?"One click in the email we just sent.":"Happens here once the form is live."}</small></div></li><li><span class="num">02</span><div>Read the six open reports<small>Full reports, free today, no account.</small></div></li><li><span class="num">03</span><div>Get in first<small>One email when all 29 open. Nothing in between.</small></div></li></ol>
+      <div class="stack-2"><h3>You're in.</h3><p class="muted m0">${LIST_LIVE?"Welcome to Sana. You'll be among the first through the door when every report opens.":"Preview only: this form isn't connected yet, so nothing was sent."}</p></div>
+      <ol class="wl-steps"><li><span class="num">01</span><div>${SITE.brevoAction?"Confirm your email":"Your spot is saved"}<small>${SITE.brevoAction?"One click in the email we just sent.":LIST_LIVE?"Nothing else to do.":"Happens here once the form is live."}</small></div></li><li><span class="num">02</span><div>Read the six open reports<small>Full reports, free today, no account.</small></div></li><li><span class="num">03</span><div>Get in first<small>One email when all 29 open. Nothing in between.</small></div></li></ol>
       <div class="row"><button class="btn btn-primary" type="button" id="wlRead"><span>Read ${esc(first?.name||"a free report")}</span><span aria-hidden="true">→</span></button><button class="btn btn-line" type="button" id="wlShare">Share Sana</button></div>
     </div>`;
     mi.querySelector("#wlRead").onclick=()=>{joinDlg.close();go("stay-"+(first?.id||""))};
@@ -2016,7 +2032,9 @@ function wlGate(){av.innerHTML=pageShell("Opening soon","Trips and accounts open
 if(SITE.goatcounter){window.goatcounter={no_onload:true};const gc=document.createElement("script");gc.async=true;gc.src="https://gc.zgo.at/count.js";gc.dataset.goatcounter=`https://${SITE.goatcounter}.goatcounter.com/count`;
   const hit=()=>window.goatcounter?.count?.({path:location.pathname+(location.hash||"#home")});gc.onload=hit;document.head.appendChild(gc);addEventListener("hashchange",hit)}
 if(WAITLIST){document.body.classList.add("wl");const nf0=document.getElementById("newsForm");if(nf0){nf0.querySelector("button").textContent="Join the waitlist";nf0.querySelector("input").setAttribute("aria-label","Your email for the waitlist")}const nn=document.getElementById("newsNote");if(nn)nn.textContent="One email when we open. Nothing else.";const cc=document.querySelector(".closing-copy");if(cc){cc.innerHTML=`<span class="eyebrow">Private preview</span><h2>Get into the full collection first.</h2><p>The best-reviewed boutique hotels in the world, read end to end by people who care about taste: what guests praise, what they quietly criticise, and whether your dates are the right ones. Six reports are open now. The other 23 go to the waitlist first.</p><div class="cg-assure"><span>Free to join</span><span>No card</span><span>One email when we open</span></div><div class="row"><button class="btn btn-primary" type="button" data-join><span>Join the waitlist</span><span aria-hidden="true">→</span></button><button class="btn btn-line" type="button" id="closeRead">Read a free report</button></div>`;cc.querySelector("#closeRead").onclick=()=>go("stay-"+(PROPS.find(p=>p.featured)?.id||""))}const j=document.getElementById("appJoin");if(j)j.textContent="Join the waitlist";
-  const nf=document.getElementById("newsForm");if(nf)nf.addEventListener("submit",async e=>{if(SITE.brevoAction)try{await fetch(SITE.brevoAction,{method:"POST",mode:"no-cors",body:new FormData(e.target)})}catch(_){}},true);
+  const nf=document.getElementById("newsForm");if(nf)nf.addEventListener("submit",async e=>{e.preventDefault();e.stopImmediatePropagation();const inp=e.target.querySelector("input[type=email]"),n=document.getElementById("newsNote");if(!inp.checkValidity()||!inp.value){n.textContent="Enter a valid email address.";return}
+    const ok=await joinList(inp.value.trim(),"Footer",e.target);if(LIST_LIVE&&!ok){n.textContent="That didn't go through. Try again in a moment.";return}
+    e.target.hidden=true;n.textContent=LIST_LIVE?"You're on the list. One email when every report opens.":"Preview: sign-up isn't connected yet, so nothing was sent."},true);
   document.addEventListener("click",e=>{const t=e.target.closest("#reqBtn,[data-trial-stay],[data-quote],[data-askconc],#saveTrip,#saveTripD");if(!t)return;e.stopImmediatePropagation();e.preventDefault();openWaitlist(t.id==="reqBtn"||t.matches("[data-quote],[data-askconc]")?"Booking opens at launch.":"Trips open at launch.")},true)}
 const det=views.stay,dst=views.dest,appbar=document.getElementById("appbar");
 function go(h){ if(location.hash.slice(1)===h) route(); else location.hash=h }
@@ -2034,13 +2052,23 @@ let icoQ=0;new MutationObserver(()=>{if(icoQ)return;icoQ=requestAnimationFrame((
   if(hb){hb.textContent=WAITLIST?"Read a free report":"Browse the collection";hb.onclick=()=>WAITLIST?go("stay-"+(PROPS.find(p=>p.featured)?.id||"")):go("collection")}}
 
 /* soft unfold: an eased scroll from the hero down to the collection */
-function softScrollTo(y,ms=1100){const y0=scrollY,dy=y-y0,t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-  const step=now=>{const t=Math.min(1,(now-t0)/ms);scrollTo(0,y0+dy*ease(t));if(t<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
+let glideRaf=0;
+function softScrollTo(y,ms){cancelAnimationFrame(glideRaf);y=Math.max(0,Math.min(y,document.documentElement.scrollHeight-innerHeight));
+  const y0=scrollY,dy=y-y0;if(Math.abs(dy)<2)return;
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){scrollTo(0,y);return}
+  const d=ms||Math.max(650,Math.min(1400,450+Math.abs(dy)*.35)),t0=performance.now(),ease=t=>t*t*t*(t*(t*6-15)+10);
+  const stop=()=>{cancelAnimationFrame(glideRaf);removeEventListener("wheel",stop);removeEventListener("touchstart",stop)};
+  addEventListener("wheel",stop,{passive:true,once:true});addEventListener("touchstart",stop,{passive:true,once:true});
+  const step=now=>{const t=Math.min(1,(now-t0)/d);scrollTo(0,y0+dy*ease(t));if(t<1)glideRaf=requestAnimationFrame(step);else stop()};glideRaf=requestAnimationFrame(step)}
+/* the navbar's height once scrolled (on the home hero it starts taller, then settles) */
+function barH(){const b=document.getElementById("appbar");if(!b)return 0;const c=document.body.classList;return c.contains("at-home")&&!c.contains("scrolled")?b.offsetHeight-parseFloat(getComputedStyle(b).paddingTop)/2:b.offsetHeight}
+/* glide an element to just under the navbar, with the section's own breathing room */
+function glideTo(el,{block="start",offset=0}={}){if(!el)return;const r=el.getBoundingClientRect(),bar=barH();
+  const y=block==="center"?r.top+scrollY-(innerHeight-r.height)/2:r.top+scrollY-bar-offset;softScrollTo(y)}
 document.querySelector(".unfold button")?.addEventListener("click",e=>{
-  const target=document.getElementById("preview");if(!target)return;
+  const stage=document.querySelector("#v-home .stage");if(!stage)return;
   e.stopImmediatePropagation();e.preventDefault();
-  const y=target.getBoundingClientRect().top+scrollY-(document.getElementById("appbar")?.offsetHeight||0);
-  matchMedia("(prefers-reduced-motion: reduce)").matches?scrollTo(0,y):softScrollTo(y)},true);
+  softScrollTo(stage.getBoundingClientRect().bottom+scrollY-barH())},true);
 
 /* one nav bar everywhere: floats over the home hero, turns solid once you scroll */
 function onNavScroll(){document.body.classList.toggle("scrolled",scrollY>40)}
@@ -2093,7 +2121,7 @@ document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go)
 document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openCollection(b.dataset.open));
 document.querySelectorAll("[data-join]").forEach(b=>b.onclick=openJoin);
 document.querySelectorAll("[data-ask]").forEach(b=>b.onclick=()=>{go("collection");setTimeout(()=>document.getElementById("askIn").focus(),60)});
-document.querySelectorAll("[data-scroll]").forEach(b=>b.onclick=()=>{if(!views.home.hidden)document.getElementById(b.dataset.scroll).scrollIntoView({behavior:"smooth"});else{go("home");setTimeout(()=>document.getElementById(b.dataset.scroll).scrollIntoView(),80)}});
+document.querySelectorAll("[data-scroll]").forEach(b=>b.onclick=()=>{if(!views.home.hidden)glideTo(document.getElementById(b.dataset.scroll));else{go("home");setTimeout(()=>glideTo(document.getElementById(b.dataset.scroll)),120)}});
 [joinDlg,wlDlg].forEach(d=>{d.addEventListener("click",e=>{if(e.target===d)d.close()});d.addEventListener("close",updateJoinbar)});
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("dialog").close());
 
@@ -2229,7 +2257,7 @@ document.getElementById("askForm").addEventListener("submit",async e=>{
       ${picks.length?`<ul class="ask-picks">${picks.map(x=>{const p=PROPS.find(y=>y.id===x.id),open=isOpen(p);return `<li><button type="button" data-id="${esc(p.id)}"><span><b>${esc(p.name)}</b><p>${esc(x.why||p.tagline||"")}</p></span><span class="small">${open?esc(fmtPrice(p)):"Members only"}</span></button></li>`}).join("")}</ul>
       <div class="row start"><button class="btn btn-primary btn-sm" type="button" id="askApply">Show these ${picks.length} in the collection</button><span class="ask-note">Suggestions from Sana's AI, based on our published reports. Check details before you book.</span></div>`:""}`;
     out.querySelectorAll(".ask-picks [data-id]").forEach(b=>b.onclick=()=>{const p=PROPS.find(x=>x.id===b.dataset.id);isOpen(p)?openDetail(p.id):openJoin()});
-    document.getElementById("askApply")?.addEventListener("click",()=>{clearFilters();S.f.ids=picks.map(x=>x.id);S.view="rec";buildTabs();refresh();document.getElementById("grid").scrollIntoView({behavior:"smooth",block:"start"})});
+    document.getElementById("askApply")?.addEventListener("click",()=>{clearFilters();S.f.ids=picks.map(x=>x.id);S.view="rec";buildTabs();refresh();glideTo(document.getElementById("grid"),{block:"start"})});
     document.getElementById("askIn").value="";document.getElementById("askIn").placeholder="Ask a follow-up, e.g. something closer to Barcelona";
   }catch(err){
     askTurns.pop();
@@ -2524,7 +2552,7 @@ function renderTrip(id,shared){
   v.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
   v.querySelectorAll("[data-join]").forEach(b=>b.onclick=openJoin);
   v.querySelectorAll("[data-waitlist2]").forEach(b=>b.onclick=()=>wlDlg.showModal());
-  v.querySelectorAll("[data-jump]").forEach(a=>a.onclick=e=>{e.preventDefault();document.getElementById(a.dataset.jump)?.scrollIntoView({behavior:"smooth",block:"start"})});
+  v.querySelectorAll("[data-jump]").forEach(a=>a.onclick=e=>{e.preventDefault();glideTo(document.getElementById(a.dataset.jump),{block:"start"})});
   v.querySelectorAll("[data-pin]").forEach(b=>b.onclick=()=>{const k=b.dataset.pin;t.pins=t.pins.includes(k)?t.pins.filter(x=>x!==k):[...t.pins,k];saveTrips(trips);const y=scrollY;renderTrip(t.id);window.scrollTo(0,y)});
   v.querySelectorAll("[data-open-stay]").forEach(b=>b.onclick=()=>{const p=PROPS.find(x=>x.id===b.dataset.openStay);isOpen(p)?openDetail(p.id):openJoin()});
   v.querySelectorAll("[data-open-dest]").forEach(b=>b.onclick=()=>openDest(b.dataset.openDest));
@@ -2649,7 +2677,7 @@ function dateInfo(p){
   const seasonWord=bm.includes(m)?"Best season":near?"Shoulder season":"Off-season";
   const weatherWord=c?(c.highC>=34?"very hot":c.highC>28?"hot":c.highC<14?"cold":c.highC<20?"cool":c.rainDays>12?"rainy":"pleasant"):null;
   const label=score>=80?"Excellent timing":score>=65?"Good timing":`${seasonWord}${weatherWord&&weatherWord!=="pleasant"?", "+weatherWord:""}`;
-  const parts=[["Season",season,50,bm.includes(m)?"In its best months":near?"Next to its best months":"Outside its best months"],...(comfort!=null?[["Temperature",comfort,25,`Around ${Math.round(c.highC)}°C by day; comfort is 20–28°C`],["Rain",rain,15,c.rainDays!=null?`About ${Math.round(c.rainDays)} rainy days`:"No rain data"]]:[]),["Events",events,10,evs.length?"Something on while you're there":"Nothing notable on"]];
+  const parts=[["Season",season,50,bm.includes(m)?"In its best months":near?"Just outside its best months":"Outside its best months"],...(comfort!=null?[["Temperature",comfort,25,`Around ${Math.round(c.highC)}°C by day (20–28°C is ideal)`],["Rain",rain,15,c.rainDays!=null?`About ${Math.round(c.rainDays)} rainy days`:"No rain data"]]:[]),["Events",events,10,evs.length?"Something on while you're there":"Nothing notable on"]];
   const wd=st.toLocaleDateString("en-GB",{weekday:"long"}),adv=p.arrival?.bestArrival?.advice||"";
   const badDay=!fromPlanner&&new RegExp(wd,"i").test(adv)&&/avoid|busiest|busy|queue|changeover/i.test(adv);
   const iso=x=>x.toISOString().slice(0,10);
@@ -2733,9 +2761,10 @@ const inTrial=p=>{if(!S.trial)return false;const t=loadTrips().find(x=>x.id===S.
 function guestHeadline(pos,neg,mix){
   const low=t=>{const x=String(t.topic).replace(/\s*\/\s*/g," and ");return /^[A-Z][a-z]/.test(x)&&!/^[A-Z][a-z]+[A-Z]/.test(x)?x.charAt(0).toLowerCase()+x.slice(1):x},list=a=>a.length<=1?a.join(""):a.slice(0,-1).join(", ")+" and "+a.slice(-1);
   const P=pos.slice(0,2).map(low),N=neg.slice(0,1).map(low);
-  if(P.length&&N.length)return `Guests praise ${esc(list(P))}; the most common complaint is ${esc(N[0])}.`;
-  if(P.length)return `Guests praise ${esc(list(P))}, with few complaints.`;
-  if(N.length)return `Guests are mixed; the most common complaint is ${esc(N[0])}.`;
+  const praised=P.length>1?`${P[0]}, and ${P[1]}`:P[0];
+  if(P.length&&N.length)return `Most praised: ${esc(praised)}. Most common complaint: ${esc(N[0])}.`;
+  if(P.length)return `Most praised: ${esc(praised)}. Few complaints.`;
+  if(N.length)return `Opinions are mixed. Most common complaint: ${esc(N[0])}.`;
   return "What guests mention most.";
 }
 
@@ -2906,20 +2935,20 @@ function renderStay(id){
   const rb=det.querySelector("#reqBtn");if(rb)rb.onclick=()=>conciergeForm(p);
   det.querySelector("#reportBtn")?.addEventListener("click",()=>S.trial?wlDlg.showModal():openSaveTrip("stay",p.id));
   bindDates(det,()=>renderStay(p.id));bindQA(p);repIndex(det);
-  document.getElementById("kpiDates")?.addEventListener("click",()=>{const f=document.getElementById("dForm");f?.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>f?.querySelector("input")?.focus({preventScroll:true}),400)});
-  document.getElementById("kpiPlace")?.addEventListener("click",()=>document.getElementById("placePanel")?.scrollIntoView({behavior:"smooth",block:"start"}));
+  document.getElementById("kpiDates")?.addEventListener("click",()=>{const f=document.getElementById("dForm");glideTo(f,{block:"center"});setTimeout(()=>f?.querySelector("input")?.focus({preventScroll:true}),400)});
+  document.getElementById("kpiPlace")?.addEventListener("click",()=>glideTo(document.getElementById("placePanel"),{block:"start"}));
   det.querySelectorAll("[data-ptype]").forEach(b=>b.onclick=()=>{S.attrType=b.dataset.ptype;const y=scrollY;renderStay(p.id);window.scrollTo(0,y)});
-  document.getElementById("kpiBook")?.addEventListener("click",()=>{const a=det.querySelector(".aside");a.scrollIntoView({behavior:"smooth",block:"start"});const rb=det.querySelector("#reqBtn");if(rb&&!rb.hidden)setTimeout(()=>conciergeForm(p),350)});
+  document.getElementById("kpiBook")?.addEventListener("click",()=>{const a=det.querySelector(".aside");glideTo(a,{block:"start"});const rb=det.querySelector("#reqBtn");if(rb&&!rb.hidden)setTimeout(()=>conciergeForm(p),350)});
   det.querySelector("#reportPeek")?.addEventListener("click",()=>{S.report=true;openDetail(p.id);setTimeout(()=>document.getElementById("report")?.scrollIntoView({block:"center"}),60)});
   det.querySelector("#toDest")?.addEventListener("click",()=>openDest(d.id));
-  det.querySelectorAll("[data-quote]").forEach(b=>b.onclick=()=>{det.querySelector(".aside").scrollIntoView({behavior:"smooth"});const r=det.querySelector("#reqBtn");if(r&&!r.hidden)setTimeout(()=>conciergeForm(p),350)});
-  det.querySelectorAll("[data-askconc]").forEach(b=>b.onclick=()=>{det.querySelector(".aside").scrollIntoView({behavior:"smooth"});const r=det.querySelector("#reqBtn");if(r&&!r.hidden)setTimeout(()=>conciergeForm(p),350)});
+  det.querySelectorAll("[data-quote]").forEach(b=>b.onclick=()=>{glideTo(det.querySelector(".aside"),{block:"start"});const r=det.querySelector("#reqBtn");if(r&&!r.hidden)setTimeout(()=>conciergeForm(p),350)});
+  det.querySelectorAll("[data-askconc]").forEach(b=>b.onclick=()=>{glideTo(det.querySelector(".aside"),{block:"start"});const r=det.querySelector("#reqBtn");if(r&&!r.hidden)setTimeout(()=>conciergeForm(p),350)});
   det.querySelectorAll("[data-pol]").forEach(b=>b.onclick=()=>openPolicy(b.dataset.pol));
   document.getElementById("saveTrip")?.addEventListener("click",()=>openSaveTrip("stay",p.id));
   det.querySelectorAll("[data-gap]").forEach(b=>b.onclick=()=>openAdd(p,b.dataset.gap));
   det.querySelector("#copyUpd")?.addEventListener("click",async e=>{const t=JSON.stringify(loadUpd(),null,1);try{await navigator.clipboard.writeText(t);e.target.textContent="copied"}catch(_){e.target.textContent="copy failed: select and copy from the console";console.log(t)}});
   const so=document.getElementById("stayOrigin");if(so)so.onchange=e=>{const y=scrollY;setOrigin(e.target.value);renderStay(id);window.scrollTo(0,y)};
-  if(!WAITLIST)det.querySelector("#mBook").onclick=()=>{const a=det.querySelector(".aside");a.scrollIntoView({behavior:"smooth"});if(p.route==="concierge"){if(rb&&!rb.hidden)conciergeForm(p)}else{const l=a.querySelector("a.btn");if(l)l.click()}};
+  if(!WAITLIST)det.querySelector("#mBook").onclick=()=>{const a=det.querySelector(".aside");glideTo(a,{block:"start"});if(p.route==="concierge"){if(rb&&!rb.hidden)conciergeForm(p)}else{const l=a.querySelector("a.btn");if(l)l.click()}};
 }
 function wlBookSoon(p){return `<div class="book ink concierge edge-ink aside-card"><div class="cg-photo"><img src="${esc(img(p))}" alt=""><span class="eyebrow">Booking · coming soon</span></div><div class="cg-body"><h4>Book ${esc(p.name)} through Sana</h4><p class="small on-ink-2 m0">At launch you'll book straight from the report: with the hotel, online, or through our concierge when the trip qualifies.</p><div class="cg-assure"><span>Free to join</span><span>No card</span></div><button class="btn btn-primary w-full" type="button" data-join><span>Join the waitlist</span><span aria-hidden="true">→</span></button></div></div>`}
 const dImg=d=>{if(d.img)return d.img;const p=PROPS.find(x=>(d.stays||[]).includes(x.id));return p?img(p):""};
@@ -3089,7 +3118,7 @@ function repIndex(root){const rep=root.querySelector(".rep");if(!rep)return;rep.
   nav.innerHTML=`<span class="eyebrow">On this page</span>${groups.map((g,k)=>`<div class="ri-group">${g.chap?`<a href="#" class="ri-chap" data-to="${g.chap.el.id}"><span class="num">${String(k+(groups[0].chap?1:0)).padStart(2,"0")}</span>${esc(g.chap.chap)}</a>`:""}<ol>${g.items.map(it=>`<li><a href="#" data-to="${it.el.id}">${esc(cap(it.t.toLowerCase()))}</a></li>`).join("")}</ol></div>`).join("")}`;
   rep.prepend(nav);rep.classList.add("has-index");
   const links=[...nav.querySelectorAll("[data-to]")];
-  links.forEach(a=>a.onclick=e=>{e.preventDefault();document.getElementById(a.dataset.to)?.scrollIntoView({behavior:"smooth",block:"start"})});
+  links.forEach(a=>a.onclick=e=>{e.preventDefault();glideTo(document.getElementById(a.dataset.to),{block:"start"})});
   const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)links.forEach(l=>l.classList.toggle("on",l.dataset.to===en.target.id))}),{rootMargin:"-25% 0px -65% 0px"});
   items.forEach(i=>io.observe(i.el))}
 function renderDest(id){
