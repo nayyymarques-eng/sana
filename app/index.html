@@ -1493,6 +1493,18 @@ body.at-home:not(.scrolled) .talk-btn{color:var(--on-ink);background:var(--gl-bg
 .j-text .j-more{margin-top:var(--s3)}
 .j-text>h3{margin:var(--s1) 0 0}
 @media (max-width:560px){.j-scores{grid-template-columns:1fr}.j-facts{grid-template-columns:1fr!important}}
+.skel{display:grid;gap:var(--s4)}
+.skel-row{display:flex;align-items:center;gap:var(--s5)}
+.skel-lines{flex:1;display:grid;gap:var(--s3)}
+.sk{display:block;border-radius:var(--r-sm);background:linear-gradient(90deg,var(--n3) 0%,var(--n4) 40%,var(--n3) 80%);background-size:300% 100%;animation:skShimmer 1.4s var(--ease-io) infinite}
+.sk-eyebrow{width:90px;height:10px}.sk-title{width:62%;height:22px}
+.sk-ring{flex:none;width:84px;height:84px;border-radius:50%}
+.sk-h{width:40%;height:18px}.sk-l{width:92%;height:12px}.sk-l.short{width:64%}
+.sk-card{height:88px;border-radius:var(--r-lg)}
+@keyframes skShimmer{0%{background-position:100% 0}100%{background-position:0 0}}
+.skel-in>*{animation:skIn .5s var(--ease) both}
+@keyframes skIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .chip-ok::before{content:"✓";margin-right:6px;color:var(--a11)}
 .chip-warn{border-color:var(--mixed)}
 .chip-warn::before{content:"!";margin-right:6px;color:var(--mixed);font-weight:600}
@@ -2881,7 +2893,13 @@ function datesPanel(p){
     ${WAITLIST?"":p.route==="concierge"?`<div class="bookstrip"><span><b>Want these dates?</b> <span class="small">Your concierge quotes ${esc(fmt(i.st))} to ${esc(fmt(i.en))} with perks, within 24 hours.</span></span><button class="btn btn-primary btn-sm" type="button" data-quote>Get a quote for these dates</button></div>`:p.route==="direct"?`<div class="bookstrip"><span><b>Ready to book?</b> <span class="small">Ask the hotel for ${esc(fmt(i.st))} to ${esc(fmt(i.en))}. It isn't on booking sites.</span></span>${p.contact?.website?`<a class="btn btn-primary btn-sm" href="${esc(p.contact.website)}" target="_blank" rel="noopener">Book with the hotel ↗</a>`:""}</div>`:`<div class="bookstrip"><span><b>Ready to book?</b> <span class="small">Check live prices for ${esc(fmt(i.st))} to ${esc(fmt(i.en))}.</span></span><span class="row gap-2"><a class="btn btn-primary btn-sm" href="${bk}" target="_blank" rel="noopener sponsored">Book these dates ↗</a></span><span class="caveat span-all m0">We may earn a commission if you book, at no cost to you.</span></div>`}
     ${i.fromPlanner||assumed?datesForm("dForm"):`<details class="chg"><summary>Change dates</summary>${datesForm("dForm")}</details>`}`);
 }
-function bindDates(scope,rerender){const fm=scope.querySelector("#dForm");if(!fm)return;fm.addEventListener("submit",e=>{e.preventDefault();saveDates({start:fm.querySelector("#dForm-s").value,nights:+fm.querySelector("#dForm-n").value});const y=scrollY;rerender();window.scrollTo(0,y)})}
+function scoreSkeleton(){return `<div class="skel" aria-busy="true" aria-live="polite"><span class="sk sk-eyebrow"></span><span class="sk sk-title"></span><div class="skel-row"><span class="sk sk-ring"></span><div class="skel-lines"><span class="sk sk-h"></span><span class="sk sk-l"></span><span class="sk sk-l short"></span></div></div><span class="sk sk-card"></span><span class="visually-hidden">Scoring your dates…</span></div>`}
+function bindDates(scope,rerender){const fm=scope.querySelector("#dForm");if(!fm)return;fm.addEventListener("submit",e=>{e.preventDefault();
+  const start=fm.querySelector("#dForm-s").value,nights=+fm.querySelector("#dForm-n").value;if(!start){fm.querySelector("#dForm-s").focus();return}
+  saveDates({start,nights});const panelEl=fm.closest(".panel"),y=scrollY;
+  const done=()=>{rerender();window.scrollTo(0,y);const np=scope.querySelector("#dForm")?.closest(".panel");np?.classList.add("skel-in")};
+  if(!panelEl||matchMedia("(prefers-reduced-motion: reduce)").matches){done();return}
+  panelEl.style.minHeight=panelEl.offsetHeight+"px";panelEl.innerHTML=scoreSkeleton();setTimeout(done,750)})}
 
 /* ---------- ask about this place (contextual AI) ---------- */
 const qaTurns={};
